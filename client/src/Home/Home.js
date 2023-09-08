@@ -9,7 +9,7 @@ function Home() {
     return (
 
         <main>
-        
+        hello
          <LoggedOutNavigation/> 
          <Video/>
          <Album/>

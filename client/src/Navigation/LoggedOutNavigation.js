@@ -140,12 +140,7 @@ function LoggedOutNavigation(props: Props) {
     //     </Drawer>
     //   </nav>
     // </Box>
-  
     <h1>hel==l</h1>
-
-
-  
-
   )
 }
 export default LoggedOutNavigation
