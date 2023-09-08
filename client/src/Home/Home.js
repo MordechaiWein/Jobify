@@ -9,11 +9,11 @@ function Home() {
     return (
 
         <main>
-         {/* <LoggedOutNavigation/> 
+            <h1>hello</h1>
+         <LoggedOutNavigation/> 
          <Video/>
          <Album/>
-         <Footer/> */}
-         hello
+         <Footer/>
         </main>
     )
 }

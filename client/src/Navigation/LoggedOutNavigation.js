@@ -23,7 +23,7 @@
 // const drawerWidth = '100%';
 // const logo = LogoImage
 
-// function LoggedOutNavigation(props: Props) {
+function LoggedOutNavigation(props: Props) {
 //   const { window } = props;
 //   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -49,7 +49,7 @@
 
 //   const container = window !== undefined ? () => window().document.body : undefined;
 
-//   return (
+  return (
 //     <Box sx={{ display: 'flex' }}>
 //       <CssBaseline />
 //       <AppBar component="nav" sx={{backgroundColor: 'white', boxShadow: 'none', color: '#1F699D'}}>
@@ -140,6 +140,7 @@
 //         </Drawer>
 //       </nav>
 //     </Box>
-//   )
-// }
-// export default LoggedOutNavigation
+<div>blank</div>
+  )
+}
+export default LoggedOutNavigation

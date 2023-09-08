@@ -3,12 +3,12 @@
 // import JobifyMovie from '../Media/JobifyMovie.mp4'
 
 
-// function Video() {
+function Video() {
   
 //   const isMobile = useMediaQuery('(max-width: 800px)');
 //   const movie = JobifyMovie;
   
-//   return (
+  return (
 //     <main
 //       style={{
 //         position: 'relative',
@@ -69,6 +69,7 @@
 //         </h4>
 //       </div>
 //     </main>
-//   )
-// }
-// export default Video
+<div>hekkki</div>
+  )
+}
+export default Video

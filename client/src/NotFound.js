@@ -4,7 +4,7 @@
 // import { useHistory } from "react-router-dom";
 // import LogoImage from './Images/logo.png'
 
-// function NotFound() {
+function NotFound() {
 
 //     const history = useHistory()
 //     const logo = LogoImage
@@ -13,7 +13,7 @@
 //         setTimeout(() => history.push("/"), 4000)
 //     }, [])
 
-//     return (
+    return (
 //         <main style={{ minHeight: '100vh', display: 'flex'}}>
 //             <Container maxWidth="xl" 
 //                 sx={{
@@ -32,8 +32,9 @@
 //                 </Typography>
 //             </Container>
 //         </main>
-//     )
+<div>hello</div>
+    )
 
-// }
+}
 
-// export default NotFound
+export default NotFound

@@ -2,9 +2,9 @@
 // import 'semantic-ui-css/semantic.min.css';
 // import {Container, Grid, Header, List,Segment,} from 'semantic-ui-react'
 
-// function Footer() {
+function Footer() {
 
-//     return (
+    return (
 
 //         <Segment inverted vertical style={{padding: '5em 0em', backgroundColor: '#F5F5F5', color: '#1F699D'}}>
 //             <Container>
@@ -50,7 +50,8 @@
 //                 </Grid>
 //             </Container>
 //         </Segment>
-//     )
-// }
+<div>helllo</div>
+    )
+}
 
-// export default Footer
+export default Footer

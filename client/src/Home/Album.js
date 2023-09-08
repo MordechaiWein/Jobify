@@ -12,8 +12,8 @@
 
 // const defaultTheme = createTheme();
 
-// function Album() {
-//   return (
+function Album() {
+  return (
 //     <ThemeProvider theme={defaultTheme}>
 //       <CssBaseline />
 //       <main>
@@ -95,6 +95,7 @@
 //         </Container>
 //       </main>
 //     </ThemeProvider>
-//   )
-// }
-// export default Album
+<div>HELLO</div>
+  )
+}
+export default Album
