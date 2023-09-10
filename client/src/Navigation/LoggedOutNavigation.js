@@ -10,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-import LogoIcon from './LogoIcon/logo.png'
+
 
  interface Props {
   /**
@@ -31,7 +31,7 @@ function LoggedOutNavigation(props: Props) {
     setMobileOpen(!mobileOpen)
   }
 
-    const logo = LogoIcon
+   
 
   const drawer = (
     <Box sx={{minHeight: '100vh', color: '#1F699D'}}>
@@ -82,7 +82,7 @@ function LoggedOutNavigation(props: Props) {
 
             }}
           >
-           <img src={logo} style={{width: '5rem'}}/>
+          
            <Typography variant="h4" sx={{fontWeight: 'bold', paddingTop: '0.7rem'}}>JOBIFY</Typography>
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
