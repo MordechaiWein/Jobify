@@ -9,7 +9,7 @@ function MyProvider({children}) {
     
     return (
         <MyContext.Provider
-            value={{user}}
+            value={{user, setUser}}
         >
             {children}                                                                                     
         </MyContext.Provider>
