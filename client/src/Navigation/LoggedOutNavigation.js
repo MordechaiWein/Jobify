@@ -71,6 +71,7 @@ function LoggedOutNavigation(props: Props) {
               fontSize:'4rem',
               }}
             />
+            <Typography variant="h4" sx={{fontWeight: 'bold', paddingTop: '0.7rem'}}>&nbsp;JOBIFY</Typography>
           </IconButton>
           <Typography
             variant="h6"

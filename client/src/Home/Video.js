@@ -22,7 +22,7 @@ function Video() {
         autoPlay
         loop
         muted
-        playsinline 
+        playsInline 
         style={{
           position: 'absolute',
           top: '0',
