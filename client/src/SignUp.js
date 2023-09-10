@@ -27,20 +27,10 @@ function Copyright(props) {
 }
 
 
-const defaultTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#1F699D', 
-    },
-    secondary: {
-      main: '#ff9800', 
-    },
-  },
-});
+const defaultTheme = createTheme();
 
 
-
-function SignIn() {
+function SignUp() {
     
     const [showPassword, setShowPassword] = useState(false)
     
@@ -86,7 +76,7 @@ function SignIn() {
             fontFamily: 'Merriweather Sans',
             fontSize: '2.5rem'
             }}>
-            Log in
+            Sign up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -130,6 +120,47 @@ function SignIn() {
                     }
                 }}
             />
+                 <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              placeholder='Password Confirmation*'
+              name="email"
+              autoComplete="email"
+              type={showPassword ? 'text' : 'password'}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                    ),
+                    style: {
+                        borderRadius: "16px",
+                    }
+                }}
+            />
+               <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              name="email"
+              placeholder='Email Address*'
+              autoComplete="email"
+                InputProps={{
+                    style: {
+                        borderRadius: "16px",
+                    }
+                }}
+            />
             <Button
               type="submit"
               fullWidth
@@ -143,7 +174,7 @@ function SignIn() {
                 fontSize:'1.2rem'
             }}
             >
-              Log In
+              Sign Up
             </Button>
           </Box>
         </Box>
@@ -153,4 +184,4 @@ function SignIn() {
   );
 }
 
-export default SignIn
+export default SignUp

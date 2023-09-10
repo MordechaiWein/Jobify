@@ -43,9 +43,23 @@ function LoggedOutNavigation(props: Props) {
       </div>
      
       <Divider />
- 
-    <Typography variant='h5' sx={{ml: 2, my: 2}}>LOG IN</Typography>
-    <Typography variant='h5' sx={{ml: 2}}>SIGN UP</Typography> 
+    <Typography variant='h5' sx={{ml: 2, my: 2, mb: 4}}>
+      <Link to='/'>
+        HOME
+      </Link>
+      </Typography>
+    <Typography variant='h5' sx={{ml: 2, my: 2, mb: 4}}>
+      <Link to='signin'>
+        LOG IN
+      </Link>
+   
+    </Typography>
+    <Typography variant='h5' sx={{ml: 2, mb: 4}}>
+      <Link to='signup'>
+        SIGN UP
+      </Link>
+   
+      </Typography> 
     </Box>
   )
 
@@ -77,16 +91,35 @@ function LoggedOutNavigation(props: Props) {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, 
-              display: { xs: 'none', sm: 'block' },
-      
-              alignItems: "center",
-
+              display: { xs: 'none', sm: 'flex', lg: 'flex' },
             }}
           >
-          
+            <img width="50" height="50" src="https://img.icons8.com/glyph-neue/64/1f699d/goal--v1.png" alt="goal--v1"/>
            <Typography variant="h4" sx={{fontWeight: 'bold', paddingTop: '0.7rem'}}>JOBIFY</Typography>
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+
+          <Button  
+                sx={{   
+                  marginRight: '1rem',
+                  marginTop: '0.7rem',
+                
+
+                }}
+              >
+                <Link 
+                  to='/'
+                  style={{
+                    color: '#1F699D',
+                    fontSize: '1.5rem', 
+                    fontWeight: 'bold'
+                  }}
+                >
+                HOME
+               </Link>
+           
+              </Button>
+                
             
               <Button  
                 sx={{   
@@ -120,7 +153,13 @@ function LoggedOutNavigation(props: Props) {
                   },
                   }}
                 >
-                SIGN UP
+                  <Link
+                   to='signup'
+                   style={{color: '#F5F5F5'}}
+                  >
+                  SIGN UP
+                  </Link>
+                
               </Button>
            
            
