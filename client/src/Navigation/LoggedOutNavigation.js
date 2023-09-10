@@ -51,7 +51,7 @@ function LoggedOutNavigation(props: Props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{backgroundColor: 'white', boxShadow: 'none', color: '#1F699D'}}>
+      <AppBar component="nav" sx={{backgroundColor: 'rgba(200, 200, 200, 0.3)', boxShadow: 'none', color: '#1F699D'}}>
    
         <Toolbar>
           <IconButton
