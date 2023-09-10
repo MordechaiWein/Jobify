@@ -8,10 +8,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
 const defaultTheme = createTheme();
 
 function Album() {
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
