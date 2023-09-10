@@ -1,19 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from './Home/Home'
 import NotFound from './NotFound'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
-import { MyContext } from "./MyContext";
 
 function App() {
-
-  const {name} = useContext(MyContext)
 
   return (
 
     <main>
-           <h1 style={{paddingTop: '5rem'}}>{name}</h1>
       <Switch>
         <Route exact path='/'>
           <Home/>
