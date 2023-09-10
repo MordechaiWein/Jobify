@@ -38,7 +38,7 @@ function Album() {
         </Box>
         <Container sx={{ py: 3, marginBottom: '10rem' }} maxWidth="lg">
           <Grid container spacing={3}>
-            <Grid item  xs={12} sm={6} md={3}>
+            <Grid item  xs={6} sm={6} md={3}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardMedia
                   component="div"
@@ -51,7 +51,7 @@ function Album() {
                 />
               </Card>
             </Grid>
-            <Grid item  xs={12} sm={6} md={3}>
+            <Grid item  xs={6} sm={6} md={3}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardMedia
                   component="div"
@@ -64,7 +64,7 @@ function Album() {
                 />
               </Card>
             </Grid>
-            <Grid item  xs={12} sm={6} md={3}>
+            <Grid item  xs={6} sm={6} md={3}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardMedia
                   component="div"
@@ -77,7 +77,7 @@ function Album() {
                   />
               </Card>
             </Grid>
-            <Grid item  xs={12} sm={6} md={3}>
+            <Grid item  xs={6} sm={6} md={3}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardMedia
                   component="div"

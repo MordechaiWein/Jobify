@@ -10,6 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import LogoIcon from './LogoIcon/logo.png'
 
  interface Props {
   /**
@@ -29,6 +30,8 @@ function LoggedOutNavigation(props: Props) {
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen)
   }
+
+    const logo = LogoIcon
 
   const drawer = (
     <Box sx={{minHeight: '100vh', color: '#1F699D'}}>
@@ -51,7 +54,7 @@ function LoggedOutNavigation(props: Props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{backgroundColor: 'rgba(200, 200, 200, 0.3)', boxShadow: 'none', color: '#1F699D'}}>
+      <AppBar component="nav" sx={{backgroundColor:'white', boxShadow: 'none', color: '#1F699D'}}>
    
         <Toolbar>
           <IconButton
@@ -79,7 +82,7 @@ function LoggedOutNavigation(props: Props) {
 
             }}
           >
-       
+           <img src={logo} style={{width: '5rem'}}/>
            <Typography variant="h4" sx={{fontWeight: 'bold', paddingTop: '0.7rem'}}>JOBIFY</Typography>
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
