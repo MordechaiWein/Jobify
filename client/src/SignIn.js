@@ -12,7 +12,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoggedOutNavigation from './Navigation/LoggedOutNavigation';
-import { useHistory } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -27,7 +26,6 @@ function Copyright(props) {
   );
 }
 
-
 const defaultTheme = createTheme({
   palette: {
     primary: {
@@ -39,19 +37,10 @@ const defaultTheme = createTheme({
   },
 });
 
-
-
 function SignIn() {
   
   const [showPassword, setShowPassword] = useState(false)
-
-  const history = useHistory()
-
-  function handleClick() {
-    history.push("/")
-  }
-
-    
+  
     function handleClickShowPassword() {
         setShowPassword(!showPassword)
     } 
@@ -83,7 +72,6 @@ function SignIn() {
             alignItems: 'center',
           }}
         >
-           <button onClick={handleClick}>history</button>
             <img width="64" height="64" 
                 src="https://img.icons8.com/glyph-neue/64/1f699d/goal--v1.png" alt="goal--v1"
                 style={{marginBottom: '2rem'}}
