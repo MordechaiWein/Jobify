@@ -4,6 +4,7 @@ import Home from './Home/Home'
 import NotFound from './NotFound'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
+import MainPage from './MainPage'
 import { MyContext } from "./MyContext";
 
 function App() {
@@ -11,17 +12,25 @@ function App() {
   const {user} = useContext(MyContext)
 
   return (
-
+    <>
+{user === null ? 
     <main>
-      <h1 style={{paddingTop: '5rem'}}>{user}</h1>
+      <Switch>
+      <Route exact path='/mainpage'>
+        <MainPage/>
+      </Route>
+      </Switch>
+    </main>
+:
+    <main>
       <Switch>
         <Route exact path='/'>
           <Home/>
         </Route>
-        <Route path='/signin'>
+        <Route exact path='/signin'>
           <SignIn/>
         </Route>
-        <Route path='/signup'>
+        <Route exact path='/signup'>
           <SignUp/>
         </Route>
         <Route path='*'>
@@ -29,7 +38,8 @@ function App() {
         </Route>
       </Switch>
     </main>
-    
+}
+</>
   )
 
 }

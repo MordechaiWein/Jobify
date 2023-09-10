@@ -4,7 +4,7 @@ const MyContext =  React.createContext()
 
 function MyProvider({children}) {
 
-    const [user, setUser] = useState('jason')
+    const [user, setUser] = useState(null)
     
     
     return (
