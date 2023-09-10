@@ -10,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-
+import { Link } from 'react-router-dom';
 
  interface Props {
   /**
@@ -89,8 +89,7 @@ function LoggedOutNavigation(props: Props) {
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             
               <Button  
-                sx={{ 
-                  color: '#F5F5F5',  
+                sx={{   
                   fontSize: '1.2rem', 
                   backgroundColor: '#1F699D', 
                   marginRight: '1rem',
@@ -100,7 +99,13 @@ function LoggedOutNavigation(props: Props) {
                   },
                 }}
               >
+                <Link 
+                  to='signin'
+                  style={{color: '#F5F5F5'}}
+                >
                 LOG IN
+               </Link>
+           
               </Button>
                 
               <Button  
