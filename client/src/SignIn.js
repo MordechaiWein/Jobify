@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import LoggedOutNavigation from './Navigation/LoggedOutNavigation';
 
 function Copyright(props) {
   return (
@@ -26,8 +27,8 @@ function Copyright(props) {
 }
 
 
-
 const defaultTheme = createTheme();
+
 
 function SignIn() {
     
@@ -53,7 +54,9 @@ function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+        <LoggedOutNavigation/>
+       
+      <Container component="main" maxWidth="xs" sx={{paddingTop: '10rem'}}>
         <CssBaseline />
         <Box
           sx={{
