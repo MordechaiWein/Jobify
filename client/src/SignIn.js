@@ -66,8 +66,17 @@ function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
-            Sign in
+            <img width="64" height="64" 
+                src="https://img.icons8.com/glyph-neue/64/1f699d/goal--v1.png" alt="goal--v1"
+                style={{marginBottom: '2rem'}}
+            />
+          <Typography component="h1" variant="h4" 
+            sx={{fontWeight: 'bold', 
+            color: "#1F699D",
+            fontFamily: 'Merriweather Sans',
+            fontSize: '2.5rem'
+            }}>
+            Log in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -76,16 +85,20 @@ function SignIn() {
               fullWidth
               id="email"
               name="email"
-              placeholder='*Username'
+              placeholder='Username*'
               autoComplete="email"
-              sx={{borderRadius: '3rem'}}
+                InputProps={{
+                    style: {
+                        borderRadius: "16px",
+                    }
+                }}
             />
             <TextField
               margin="normal"
               required
               fullWidth
               id="email"
-              placeholder='*Password'
+              placeholder='Password*'
               name="email"
               autoComplete="email"
               type={showPassword ? 'text' : 'password'}
@@ -102,13 +115,23 @@ function SignIn() {
                             </IconButton>
                         </InputAdornment>
                     ),
+                    style: {
+                        borderRadius: "16px",
+                    }
                 }}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ 
+                mt: 3, mb: 2 ,
+                borderRadius: "16px", 
+                height: '3.3rem',
+                backgroundImage: 'linear-gradient(to right, #ba68c8, #1F699D)',
+                fontWeight: 'bold',
+                fontSize:'1.2rem'
+            }}
             >
               Sign In
             </Button>
