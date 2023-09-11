@@ -45,6 +45,7 @@ function SignIn() {
   const history = useHistory()
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState([])
+  const [signInLoading, setSignInLoading] = useState(false)
   const [data, setData] = useState({
     username: '',
     password: ''
@@ -66,6 +67,7 @@ function SignIn() {
 
 
     function handleSubmit(e) {
+      setSignInLoading(true)
       e.preventDefault()
       fetch('/login', {
         method: 'POST',
@@ -76,6 +78,7 @@ function SignIn() {
         if (response.ok) {
           response.json().then(data => {
             setUser(data)
+            setSignInLoading(false)
             history.push("/myboard")
           })
         } else {
@@ -168,7 +171,7 @@ function SignIn() {
                 fontSize:'1.2rem'
             }}
             >
-              Log In
+             {signInLoading === true ? 'Loading...' : 'Log In'}
             </Button>
           </Box>
         </Box>

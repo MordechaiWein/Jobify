@@ -6,6 +6,8 @@ import SignIn from './SignIn'
 import SignUp from './SignUp'
 import MyBoard from './MyBoard'
 import About from './About'
+import Admin from './Admin'
+import JobPortal from './JobPortal'
 import { MyContext } from "./MyContext";
 
 function App() {
@@ -41,6 +43,12 @@ function App() {
             </Route>
             <Route exact path='/about'>
               <About/>
+            </Route>
+            <Route exact path='/admin'>
+              <Admin/>
+            </Route>
+            <Route exact path='/jobportal'>
+              <JobPortal/>
             </Route>
             <Route path='*'>
               <NotFound/>

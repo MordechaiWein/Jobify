@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function MyBoard() {
+function JobPortal() {
 
     const cards = [1];
     const defaultTheme = createTheme();
@@ -73,12 +73,5 @@ function MyBoard() {
         </main>
     )
 }
-export default MyBoard
-
-
-
-
-
-
-
+export default JobPortal
 

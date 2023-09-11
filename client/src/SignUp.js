@@ -38,6 +38,7 @@ function SignUp() {
 
   const {setUser} = useContext(MyContext)
   const [showPassword, setShowPassword] = useState(false)
+  const [signUpLoading, setSignUpLoading] = useState(false)
   const [data, setData] = useState({
     username: '',
     password: '',
@@ -65,6 +66,7 @@ function SignUp() {
   }
 
   function handleSubmit(e) {
+    setSignUpLoading(true)
     e.preventDefault() 
     fetch('/signup', {
       method: 'POST',
@@ -75,6 +77,7 @@ function SignUp() {
       if (response.ok) {
         response.json().then(data => {
           setUser(data)
+          setSignUpLoading(false)
           history.push("/myboard")
         })
       } else {
@@ -219,7 +222,7 @@ function SignUp() {
                 fontSize:'1.2rem'
             }}
             >
-              Sign Up
+              {signUpLoading === true ? 'Loading...' : 'Sign Up'}
             </Button>
           </Box>
         </Box>

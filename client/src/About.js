@@ -48,7 +48,7 @@ function About() {
                     </Typography>
                 </Container>
             </section>
-            <section style={{backgroundColor: '#00C4B4', minHeight: '50vh',textAlign: isMobile?  'center' : ""}}>
+            <section style={{backgroundColor: '#00A89E', minHeight: '50vh',textAlign: isMobile?  'center' : ""}}>
                 <Container component="section" maxWidth="xl" sx={{marginTop: 8, color: 'white'}}>
                     <CssBaseline />
                     <Typography variant="h2" sx={{fontWeight: 'bold',paddingTop: '5rem',fontFamily: 'Merriweather Sans'}}>
@@ -93,7 +93,7 @@ function About() {
                     </Typography>
                 </Container>
             </section>
-            <section style={{backgroundColor: '#00C4B4', minHeight: '50vh',textAlign: isMobile?  'center' : ""}}>
+            <section style={{backgroundColor: '#00A89E', minHeight: '50vh',textAlign: isMobile?  'center' : ""}}>
                 <Container component="section" maxWidth="xl" sx={{marginTop: 8, color: 'white'}}>
                     <CssBaseline />
                     <Typography variant="h2" sx={{fontWeight: 'bold', paddingTop: '5rem', fontFamily: 'Merriweather Sans'}}>
@@ -141,12 +141,12 @@ function About() {
                             fontWeight: 'bold', 
                             fontFamily: 'Merriweather Sans'
                             }}
-                        >
-                            Your privacy and data security are our top priorities. 
-                            We employ the latest security measures to safeguard your personal information and ensure a
-                            safe browsing experience.
-                   </Typography> 
-                    <Typography variant="h4" 
+                    >
+                        Your privacy and data security are our top priorities. 
+                        We employ the latest security measures to safeguard your personal information and ensure a
+                        safe browsing experience.
+                    </Typography>
+                    <Typography variant="h4"
                         sx={{
                             paddingTop: '2rem', 
                             lineHeight: '3rem', 
