@@ -22,8 +22,6 @@ class User(db.Model, SerializerMixin):
     jobs = db.relationship('Job', secondary= user_job_join, back_populates='users')
     considerations = db.relationship('Consideration', backref='user')
 
-    serialize_rules = ('-considerations.user')
-
     def __repr__(self):
         return f"User| id: {self.id}, username: {self.username}, password: {self._password_hash}"
     
@@ -69,8 +67,8 @@ class Job(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=func.now())
     
     users = db.relationship('User', secondary= user_job_join, back_populates='jobs')
-    responsibilities = db.relationship('Responsibility', backref='job')
-    qualifications = db.relationship('Qualification', backref='job')
+    responsibilities = db.relationship('Responsibility', backref='job', cascade='all, delete-orphan')
+    qualifications = db.relationship('Qualification', backref='job', cascade='all, delete-orphan')
 
     serialize_rules = ('-responsibilities.job', '-qualifications.job')
 

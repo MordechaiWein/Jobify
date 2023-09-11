@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,6 +12,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoggedOutNavigation from './Navigation/LoggedOutNavigation';
+import { MyContext } from "./MyContext";
+import { useHistory } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -31,26 +33,60 @@ const defaultTheme = createTheme();
 
 
 function SignUp() {
-    
-    const [showPassword, setShowPassword] = useState(false)
-    
-    function handleClickShowPassword() {
-        setShowPassword(!showPassword)
-    } 
 
-    function handleMouseDownPassword(event) {
-        event.preventDefault()
-    }
+  const history = useHistory()
+
+  const {user, setUser} = useContext(MyContext)
+  const [showPassword, setShowPassword] = useState(false)
+  const [data, setData] = useState({
+    username: '',
+    password: '',
+    password_confirmation: '',
+    email_address: ''
+  })
+
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+    email_address: ''
+  })
+
+  function handleChange(event) {
+    setErrors({...errors, [event.target.name] : ''})
+    setData({...data, [event.target.name] : event.target.value})
+  }
+ 
+  function handleClickShowPassword() {
+    setShowPassword(!showPassword)
+  } 
+  
+  function handleMouseDownPassword(event) {
+    event.preventDefault()
+  }
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  function handleSubmit(e) {
+    e.preventDefault() 
+    fetch('/signup', {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    })
+    .then((response) => {
+      if (response.ok) {
+        response.json().then(data => {
+          setUser(data)
+          console.log(user)
+          history.push("/mainpage")
+        })
+      } else {
+        response.json().then(data => {
+          setErrors(data.errors)
+          console.log(errors)
+        })
+      }
+    })
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -83,24 +119,27 @@ function SignUp() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              name="email"
+              id="username"
+              name="username"
+              onChange={handleChange}
               placeholder='Username*'
-              autoComplete="email"
+              autoComplete="off"
                 InputProps={{
                     style: {
                         borderRadius: "16px",
                     }
                 }}
             />
+            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.username}</small>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="password"
               placeholder='Password*'
-              name="email"
-              autoComplete="email"
+              name="password"
+              onChange={handleChange}
+              autoComplete="password"
               type={showPassword ? 'text' : 'password'}
                 InputProps={{
                     endAdornment: (
@@ -120,14 +159,16 @@ function SignUp() {
                     }
                 }}
             />
+             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.password}</small>
                  <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="password_confirmation"
               placeholder='Password Confirmation*'
-              name="email"
-              autoComplete="email"
+              name="password_confirmation"
+              onChange={handleChange}
+              autoComplete="password_confirmation"
               type={showPassword ? 'text' : 'password'}
                 InputProps={{
                     endAdornment: (
@@ -147,20 +188,23 @@ function SignUp() {
                     }
                 }}
             />
+            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.password}</small>
                <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              name="email"
+              id="email_address"
+              name="email_address"
+              onChange={handleChange}
               placeholder='Email Address*'
-              autoComplete="email"
+              autoComplete="email_address"
                 InputProps={{
                     style: {
                         borderRadius: "16px",
                     }
                 }}
             />
+            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.email_address}</small>
             <Button
               type="submit"
               fullWidth

@@ -13,34 +13,33 @@ function App() {
 
   return (
     <>
-{user === null ? 
-    <main>
-      <Switch>
-      <Route exact path='/mainpage'>
-        <MainPage/>
-      </Route>
-      </Switch>
-    </main>
-:
-    <main>
-      <Switch>
-        <Route exact path='/'>
-          <Home/>
-        </Route>
-        <Route exact path='/signin'>
-          <SignIn/>
-        </Route>
-        <Route exact path='/signup'>
-          <SignUp/>
-        </Route>
-        <Route path='*'>
-          <NotFound/>
-        </Route>
-      </Switch>
-    </main>
-}
-</>
+      {user === null ? 
+        <main>
+          <Switch>
+            <Route exact path='/'>
+              <Home/>
+            </Route>
+            <Route exact path='/signin'>
+              <SignIn/>
+            </Route>
+            <Route exact path='/signup'>
+              <SignUp/>
+            </Route>
+            <Route path='*'>
+              <NotFound/>
+            </Route>
+          </Switch>
+        </main>
+        :
+        <main>
+          <Switch>
+            <Route exact path='/mainpage'>
+              <MainPage/>
+            </Route>
+          </Switch>
+        </main>
+      }
+    </>
   )
-
 }
 export default App
