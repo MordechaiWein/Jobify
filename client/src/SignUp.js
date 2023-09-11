@@ -114,7 +114,7 @@ function SignUp() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
-            {...(errors.username ? { error: true } : {})}
+              {...(errors && errors.username ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -131,7 +131,7 @@ function SignUp() {
             />
             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.username}</small>
             <TextField
-            {...(errors.password ? { error: true } : {})}
+            {...(errors && errors.password ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -161,7 +161,7 @@ function SignUp() {
             />
              <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.password}</small>
                  <TextField
-                 {...(errors.password ? { error: true } : {})}
+                  {...(errors && errors.password ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -191,7 +191,7 @@ function SignUp() {
             />
             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.password}</small>
                <TextField
-               {...(errors.email_address ? { error: true } : {})}
+                {...(errors && errors.email_address ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
