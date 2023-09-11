@@ -1,11 +1,11 @@
 import React from "react";
-
+import LoggedInNavigation from "./Navigation/LoggedInNavigation";
 function MainPage() {
 
     return (
 
         <main>
-            <h1>hello</h1>
+            <LoggedInNavigation/>
         </main>
     )
 }

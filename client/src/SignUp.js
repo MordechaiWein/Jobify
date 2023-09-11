@@ -36,7 +36,7 @@ function SignUp() {
 
   const history = useHistory()
 
-  const {user, setUser} = useContext(MyContext)
+  const {setUser} = useContext(MyContext)
   const [showPassword, setShowPassword] = useState(false)
   const [data, setData] = useState({
     username: '',
@@ -76,13 +76,11 @@ function SignUp() {
       if (response.ok) {
         response.json().then(data => {
           setUser(data)
-          console.log(user)
           history.push("/mainpage")
         })
       } else {
         response.json().then(data => {
           setErrors(data.errors)
-          console.log(errors)
         })
       }
     })
@@ -116,6 +114,7 @@ function SignUp() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+            {...(errors.username ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -132,6 +131,7 @@ function SignUp() {
             />
             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.username}</small>
             <TextField
+            {...(errors.password ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -161,6 +161,7 @@ function SignUp() {
             />
              <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.password}</small>
                  <TextField
+                 {...(errors.password ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -190,6 +191,7 @@ function SignUp() {
             />
             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.password}</small>
                <TextField
+               {...(errors.email_address ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -222,8 +224,11 @@ function SignUp() {
             </Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright sx={{ mt: 4, mb: 4}} />
       </Container>
+      <br/>
+      <br/>
+    
     </ThemeProvider>
   );
 }

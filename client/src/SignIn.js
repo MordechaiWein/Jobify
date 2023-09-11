@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,6 +12,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoggedOutNavigation from './Navigation/LoggedOutNavigation';
+import { MyContext } from "./MyContext";
+import { useHistory } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -38,8 +40,16 @@ const defaultTheme = createTheme({
 });
 
 function SignIn() {
-  
+
+  const {setUser} = useContext(MyContext)
+  const history = useHistory()
   const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState([])
+  const [data, setData] = useState({
+    username: '',
+    password: ''
+  })
+  
   
     function handleClickShowPassword() {
         setShowPassword(!showPassword)
@@ -49,15 +59,30 @@ function SignIn() {
         event.preventDefault()
     }
 
+    function handleChange(event) {
+      setError([])
+      setData({...data, [event.target.name] : event.target.value})
+    }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+    function handleSubmit(e) {
+      e.preventDefault()
+      fetch('/login', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      })
+      .then((response) => {
+        if (response.ok) {
+          response.json().then(data => {
+            setUser(data)
+            history.push("/mainpage")
+          })
+        } else {
+          response.json().then(data => setError(data.error))
+        }
+      })
+    }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -90,9 +115,10 @@ function SignIn() {
               required
               fullWidth
               id="email"
-              name="email"
+              name="username"
+              onChange={handleChange}
               placeholder='Username*'
-              autoComplete="email"
+              autoComplete="off"
                 InputProps={{
                     style: {
                         borderRadius: "16px",
@@ -105,7 +131,8 @@ function SignIn() {
               fullWidth
               id="email"
               placeholder='Password*'
-              name="email"
+              onChange={handleChange}
+              name="password"
               autoComplete="email"
               type={showPassword ? 'text' : 'password'}
                 InputProps={{
@@ -126,6 +153,7 @@ function SignIn() {
                     }
                 }}
             />
+            <small style={{color: 'red', fontSize: '1.4rem'}}>{error}</small>
             <Button
               type="submit"
               fullWidth
