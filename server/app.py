@@ -1,3 +1,4 @@
+import os
 from flask import jsonify, request, session, render_template
 from sqlalchemy.exc import IntegrityError
 from flask_restful import Resource
