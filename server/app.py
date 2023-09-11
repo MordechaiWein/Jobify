@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from flask_restful import Resource
 from config import app, db, api, bcrypt
 from models import db, User, Job, Responsibility, Qualification
-
+print(os.environ.get("SESSION_KEY"))
 @app.errorhandler(404)
 def not_found(e):
     return render_template("index.html")
@@ -103,5 +103,5 @@ api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 
 
-if __name__ == "__main__":
-    app.run(port=8000, debug=True)
+# if __name__ == "__main__":
+#     app.run(port=8000, debug=True)
