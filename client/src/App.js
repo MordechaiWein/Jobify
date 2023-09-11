@@ -4,12 +4,15 @@ import Home from './Home/Home'
 import NotFound from './NotFound'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
-import MainPage from './MainPage'
+import MyBoard from './MyBoard'
+import About from './About'
 import { MyContext } from "./MyContext";
 
 function App() {
 
-  const {user} = useContext(MyContext)
+  const {user, isLoading} = useContext(MyContext)
+
+  if (isLoading === true) return <div></div>
 
   return (
     <>
@@ -33,8 +36,14 @@ function App() {
         :
         <main>
           <Switch>
-            <Route exact path='/mainpage'>
-              <MainPage/>
+            <Route exact path='/myboard'>
+              <MyBoard/>
+            </Route>
+            <Route exact path='/about'>
+              <About/>
+            </Route>
+            <Route path='*'>
+              <NotFound/>
             </Route>
           </Switch>
         </main>

@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useContext }  from 'react';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useHistory } from "react-router-dom";
 import Button from '@mui/material/Button';
+import { MyContext } from "./MyContext";
 
 function NotFound() {
     
     const history = useHistory()
+    const {user} = useContext(MyContext)
 
-    function handleClick() {
+    function handleOutClick() {
         history.push("/")
+    }
+
+    function handleInClick() {
+        history.push("/myboard")
     }
   
     return (
@@ -27,16 +33,20 @@ function NotFound() {
                 <Typography variant="h7" sx={{color: '#1F699D', fontFamily: 'Merriweather Sans'}}>Unlock Your Career Potential</Typography>
                 <Typography variant="h3" sx={{color: '#1F699D', paddingTop: '1rem', fontFamily: 'Merriweather Sans', textAlign: 'center'}}>Sorry, we couldn't find the page you are looking for.</Typography>
                 <Typography variant="h4" sx={{color: '#1F699D', paddingTop: '1rem', textAlign: 'center', fontFamily: 'Merriweather Sans'}}>
-                    Click the button below to navigate back to the home page.
+                    {user === null ? (
+                        "Click the button below to navigate back to the home page."
+                        ):(
+                        "Click the button below to navigate back to the main page."
+                    )}
                 </Typography>
                 <Button
-                    onClick={handleClick}
+                    onClick={user === null ? handleOutClick : handleInClick }
                     variant="contained"
                     sx={{
                         marginTop: '2rem',
                         fontWeight: 'bold',
                         backgroundColor: '#1F699D',
-                        height: '3rem',
+                        height: '3.5rem',
                         borderRadius: '25px',
                         fontSize: '1rem',
                         fontFamily: 'Merriweather Sans',
@@ -45,7 +55,7 @@ function NotFound() {
                           },
                     }}
                 >
-                    Back to Home Page
+                    {user === null ? "Back to Home Page" : "Back to Main Page" }
                 </Button>
             </Container>
         </main>

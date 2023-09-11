@@ -1,6 +1,7 @@
 import React from "react";
 import LoggedInNavigation from "./Navigation/LoggedInNavigation";
-function MainPage() {
+
+function MyBoard() {
 
     return (
 
@@ -9,4 +10,4 @@ function MainPage() {
         </main>
     )
 }
-export default MainPage
+export default MyBoard

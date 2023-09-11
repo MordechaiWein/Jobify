@@ -76,7 +76,7 @@ function SignUp() {
       if (response.ok) {
         response.json().then(data => {
           setUser(data)
-          history.push("/mainpage")
+          history.push("/myboard")
         })
       } else {
         response.json().then(data => {
@@ -90,7 +90,7 @@ function SignUp() {
     <ThemeProvider theme={defaultTheme}>
         <LoggedOutNavigation/>
        
-      <Container component="main" maxWidth="xs" sx={{paddingTop: '10rem'}}>
+      <Container component="main" maxWidth="xs" sx={{paddingTop: '5rem'}}>
         <CssBaseline />
         <Box
           sx={{
@@ -224,11 +224,8 @@ function SignUp() {
             </Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 4, mb: 4}} />
-      </Container>
-      <br/>
-      <br/>
-    
+        <Copyright sx={{ mt: 8, mb: 4}} />
+      </Container> 
     </ThemeProvider>
   );
 }

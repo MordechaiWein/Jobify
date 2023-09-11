@@ -76,7 +76,7 @@ function SignIn() {
         if (response.ok) {
           response.json().then(data => {
             setUser(data)
-            history.push("/mainpage")
+            history.push("/myboard")
           })
         } else {
           response.json().then(data => setError(data.error))
@@ -87,7 +87,7 @@ function SignIn() {
   return (
     <ThemeProvider theme={defaultTheme}>
         <LoggedOutNavigation/>
-      <Container component="main" maxWidth="xs" sx={{paddingTop: '10rem'}}>
+      <Container component="main" maxWidth="xs" sx={{paddingTop: '5rem'}}>
         <CssBaseline />
         <Box
           sx={{
@@ -111,6 +111,7 @@ function SignIn() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+            
               margin="normal"
               required
               fullWidth
@@ -153,7 +154,7 @@ function SignIn() {
                     }
                 }}
             />
-            <small style={{color: 'red', fontSize: '1.4rem'}}>{error}</small>
+            <small style={{color: 'red', fontSize: '1.2rem', marginLeft: '0.5rem'}}>{error}</small>
             <Button
               type="submit"
               fullWidth
