@@ -64,7 +64,6 @@ function SignUp() {
     event.preventDefault()
   }
 
-
   function handleSubmit(e) {
     e.preventDefault() 
     fetch('/signup', {
@@ -129,7 +128,7 @@ function SignUp() {
                     }
                 }}
             />
-            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.username}</small>
+            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.username}</small>
             <TextField
             {...(errors && errors.password ? { error: true } : {})}
               margin="normal"
@@ -159,7 +158,7 @@ function SignUp() {
                     }
                 }}
             />
-             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.password}</small>
+             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.password}</small>
                  <TextField
                   {...(errors && errors.password ? { error: true } : {})}
               margin="normal"
@@ -189,7 +188,7 @@ function SignUp() {
                     }
                 }}
             />
-            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.password}</small>
+            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.password}</small>
                <TextField
                 {...(errors && errors.email_address ? { error: true } : {})}
               margin="normal"
@@ -206,7 +205,7 @@ function SignUp() {
                     }
                 }}
             />
-            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors.email_address}</small>
+            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.email_address}</small>
             <Button
               type="submit"
               fullWidth
