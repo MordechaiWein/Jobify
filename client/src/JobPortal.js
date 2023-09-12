@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from 'react'
 import LoggedInNavigation from "./Navigation/LoggedInNavigation";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -7,15 +7,21 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+import { MyContext } from "./MyContext";
+
 
 function JobPortal() {
-
-    const cards = [1];
+    
     const defaultTheme = createTheme();
-    
+    const {jobs} = useContext(MyContext)
+
     return (
-    
+
         <main>
             <LoggedInNavigation/>
             <ThemeProvider theme={defaultTheme}>
@@ -35,34 +41,109 @@ function JobPortal() {
                                 color="text.primary"
                                 gutterBottom
                             >
-                                Your Jobs
+                                Jobify Job Portal
                             </Typography>
                             <Typography variant="h5" color="text.secondary" paragraph>
-                                Refer here to keep an eye on your saved jobs.
+                                Continue your job search.
                             </Typography>
+                            <TextField
+                                required
+                                fullWidth
+                                name="animal-search"
+                                placeholder='Search a job title...'
+                                type="text"
+                                id="password"
+                                autoComplete="current-password"
+                                style={{
+                                    marginBottom: '2rem', 
+                                    marginTop: '4rem',
+                                    width: '100%'
+                                }}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
                         </Container>
                     </Box>
                     <Container sx={{ py: 3 }} maxWidth="lg">
                         <Grid container spacing={4}>
-                            {cards.map((card) => (
-                            <Grid item key={card} xs={12} sm={6} md={4}>
+                            {jobs.map((job) => (
+                            <Grid item key={job.id} xs={12} sm={6} md={4}>
                                 <Card
                                     sx={{ 
                                         height: '20rem', 
                                         display: 'flex', 
                                         flexDirection: 'column', 
-                                        color: 'white',
-                                        backgroundColor: '#ba68c8'
+                                    
                                     }}
                                 >
-                                    <CardContent sx={{ flexGrow: 1 }}>
-                                        <Typography gutterBottom variant="h5" component="h2" sx={{fontWeight: 'bold', paddingTop: '3rem'}}>
-                                            Software Engineer
+                                    <CardContent sx={{ flexGrow: 1 ,ml: 2}}>
+                                        <img width="48" height="48" src="https://img.icons8.com/color/48/qgenda.png" alt="qgenda"/>
+                                        <Typography gutterBottom variant="h6" component="h2" 
+                                            sx={{fontWeight: 'bold', color: '#49447f'}}>
+                                            {job.title}
                                         </Typography>
-                                        <Typography>
-                                            Apartment List
+                                        <Typography sx={{textDecoration: 'underline'}}>
+                                            {job.company_name}
                                         </Typography>
+                                        <Typography sx={{paddingTop: "0.5rem"}}>
+                                            {job.location}
+                                        </Typography>
+                                        <Button
+                                            variant="contained"
+                                            disableRipple 
+                                            sx={{ 
+                                                mt: 3, mb: 2 ,
+                                                color: 'red',
+                                                height: '2rem',
+                                                backgroundColor: 'mistyrose',
+                                                fontWeight: 'bold',
+                                                boxShadow: 'none',
+                                                textTransform: 'none',
+                                                '&:hover': {
+                                                    backgroundColor: 'mistyrose', 
+                                                    boxShadow: 'none'
+                                                },
+                                            }}
+                                        >
+                                            {job.remote === true ? '👨🏻‍💻 Remote' : 'Not Remote'}
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            disableRipple 
+                                            sx={{ 
+                                                mt: 3, mb: 2 ,
+                                                color: '#DAA520',
+                                                height: '2rem',
+                                                backgroundColor: '#ffffe6',
+                                                fontWeight: 'bold',
+                                                boxShadow: 'none',
+                                                textTransform: 'none',
+                                                marginLeft: '4rem',
+                                                border: 'solid 0.1px',
+                                                '&:hover': {
+                                                    backgroundColor: '#ffffe6', 
+                                                    boxShadow: 'none'
+                                                },
+                                            }}
+                                        >
+                                            {job.job_type}
+                                        </Button>
                                     </CardContent>
+                                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                        <Typography 
+                                            sx={{padding: '0.5rem', color: '#ba68c8', fontWeight: 'bold'}}>
+                                            {job.industry}
+                                        </Typography>
+                                        <Typography 
+                                            sx={{marginRight: '1rem', color: '#302a79'}}>
+                                            posted: {job.created_at}
+                                        </Typography>
+                                    </div>
                                 </Card>
                             </Grid>
                             ))}
@@ -70,8 +151,9 @@ function JobPortal() {
                     </Container>
                 </main>
             </ThemeProvider>
-        </main>
-    )
+        </main>             
+    ) 
 }
 export default JobPortal
+
 

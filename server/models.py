@@ -62,8 +62,8 @@ class Job(db.Model, SerializerMixin):
     remote = db.Column(db.Boolean, default=False)
     salary = db.Column(db.String)
     location = db.Column(db.String)
-    longitude = db.Column(db.Integer)
-    latitude =  db.Column(db.Integer)
+    longitude = db.Column(db.Float)
+    latitude =  db.Column(db.Float)
     created_at = db.Column(db.DateTime, server_default=func.now())
     
     users = db.relationship('User', secondary= user_job_join, back_populates='jobs')
