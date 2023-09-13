@@ -82,7 +82,10 @@ function SignIn() {
             history.push("/myboard")
           })
         } else {
-          response.json().then(data => setError(data.error))
+          response.json().then(data => {
+            setError(data.error)
+            setSignInLoading(false)
+          })
         }
       })
     }
@@ -168,7 +171,8 @@ function SignIn() {
                 height: '3.3rem',
                 backgroundImage: 'linear-gradient(to right, #ba68c8, #1F699D)',
                 fontWeight: 'bold',
-                fontSize:'1.2rem'
+                fontSize:'1.2rem',
+                fontFamily: 'Merriweather Sans'
             }}
             >
              {signInLoading === true ? 'Loading...' : 'Log In'}

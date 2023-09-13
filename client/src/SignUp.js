@@ -83,6 +83,7 @@ function SignUp() {
       } else {
         response.json().then(data => {
           setErrors(data.errors)
+          setSignUpLoading(false)
         })
       }
     })
@@ -219,7 +220,8 @@ function SignUp() {
                 height: '3.3rem',
                 backgroundImage: 'linear-gradient(to right, #ba68c8, #1F699D)',
                 fontWeight: 'bold',
-                fontSize:'1.2rem'
+                fontSize:'1.2rem',
+                fontFamily: 'Merriweather Sans'
             }}
             >
               {signUpLoading === true ? 'Loading...' : 'Sign Up'}

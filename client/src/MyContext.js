@@ -33,7 +33,8 @@ function MyProvider({children}) {
                 user, 
                 setUser,
                 isLoading,
-                jobs
+                jobs,
+                setJobs
             }}
         >
             {children}                                                                                     

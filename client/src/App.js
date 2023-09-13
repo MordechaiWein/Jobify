@@ -47,7 +47,7 @@ function App() {
             <Route exact path='/admin'>
               <Admin/>
             </Route>
-            <Route exact path='/jobportal'>
+            <Route path='/jobportal'>
               <JobPortal/>
             </Route>
             <Route path='*'>

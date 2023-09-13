@@ -1,12 +1,16 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from "react";
 import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import Typography from '@mui/material/Typography';
+import { useHistory, useParams } from "react-router-dom";
+import { MyContext } from "./MyContext";
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { MyContext } from "./MyContext";
 import Divider from '@mui/material/Divider';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -15,25 +19,55 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { useHistory } from "react-router-dom";
 
-const defaultTheme = createTheme();
 
-function AdminYes() {
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+      padding: theme.spacing(2),
+      // overflow: 'hidden',
+    },
+    '& .MuiDialogActions-root': {
+      padding: theme.spacing(1),
+    },
+    '& .MuiPaper-root': {
+      // maxHeight: '100%', 
+      // marginTop: '10rem'
+    },
+  }));
+
+  const defaultTheme = createTheme();
+
+function JobEditForm({ setEditFLag }) {
   
-  const {user, jobs, setJobs} = useContext(MyContext)
+  const [open, setOpen] = useState(true);
   const history = useHistory()
+  const params = useParams()
+  const {user, jobs, setJobs} = useContext(MyContext)
+
+  let selectedJob = ''
+
+  if (jobs && jobs.length > 0) {
+    selectedJob = jobs.find(job => job.id === parseInt(params.id)) 
+  }
+  
+  
+  function handleClose() {
+    setOpen(false)
+    history.push('/jobportal')
+  }
+
+
   const [data, setData] = useState({
-    company_name: '',
-    title: '',
-    job_description: '',
-    job_type: '',
-    industry: '',
-    remote: '',
-    salary: '',
-    location: '',
-    longitude: '',
-    latitude: ''
+    company_name: selectedJob.company_name,
+    title: selectedJob.title,
+    job_description: selectedJob.job_description,
+    job_type: selectedJob.job_type,
+    industry: selectedJob.industry,
+    remote: selectedJob.remote,
+    salary: selectedJob.salary,
+    location: selectedJob.location,
+    longitude: selectedJob.longitude,
+    latitude: selectedJob.latitude
   })
 
   const [errors, setErrors] = useState({
@@ -48,6 +82,10 @@ function AdminYes() {
     longitude: '',
     latitude: ''
   })
+
+  function handleEditClick() {
+    setEditFLag(false)
+  }
 
   function handleChange(event) {
     setErrors({...errors, [event.target.name] : ''})
@@ -64,39 +102,83 @@ function AdminYes() {
     setData({ ...data, remote: true })
   }
 
-  function handleSubmit(e) {
+
+function handleSubmit(e) {
     e.preventDefault()
-    fetch("/jobs", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(data)
+    fetch(`/jobs/${selectedJob.id}`, {
+        method: "PATCH",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
     })
     .then((response) => {
-      if (response.ok) {
-        response.json().then(data => {
-          setJobs([...jobs, data])
-          history.push('/jobportal')
-        })
-      } else {
-        response.json().then(data => {
-          setErrors(data.errors)
-        })
-      }
+        if (response.ok) {
+            response.json().then(data => {
+              setJobs(jobs.map(job => {
+                if (job.id === data.id) {
+                  return data
+                } else {
+                  return job
+                }
+              }))
+              history.push('/jobportal')
+            })
+        } else {
+            response.json().then(data => setErrors(data.errors))
+        }
     })
-  }
+}
+
 
   return (
+    <main>
+        <BootstrapDialog 
+            maxWidth="md"
+            onClose={handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={open}
+            sx={{backgroundColor: 'rgba(70, 0, 220, 0.6)'}}
+            PaperProps={{
+                sx: {
+                    borderRadius: '10px'  
+                },
+            }}
+        >
+          
+            <DialogContent>
+
     <main>
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="md">
           <CssBaseline />
           <Box
             sx={{
-              marginTop: 15,
+              marginTop: 5,
               display: 'flex',
               flexDirection: 'column'
             }}
           >
+            <Button
+              variant="contained"
+              disableRipple
+              onClick={handleEditClick} 
+              sx={{ 
+                mb: 4 ,
+                color: 'white',
+                height: '3rem',
+                backgroundColor: '#ff9800',
+                fontWeight: 'bold',
+                boxShadow: 'none',
+                textTransform: 'none',
+                fontSize: '1rem',
+                width: '15rem',
+                '&:hover': {
+                  backgroundColor: '#ed6c02',
+                  boxShadow: 'none'
+                },
+              }}
+            >
+              Go back to Job details 
+            </Button>
             <Typography variant="h4"
               sx={{
                 fontWeight: 'bold', 
@@ -107,7 +189,7 @@ function AdminYes() {
               Welcome Admin {user.username}
             </Typography>
             <Typography component="h1" variant="h4" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans'}}>
-              Add a job here
+              Job Edit Form
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <FormControl>
@@ -120,15 +202,16 @@ function AdminYes() {
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
+                  value={data.remote ? "yes" : "no"} 
                 >
                   <FormControlLabel 
-                    value="female" 
+                    value="yes" 
                     control={<Radio />} 
                     label="Yes"
                     onChange={remoteYesChange}
                   />
                   <FormControlLabel 
-                    value="male" 
+                    value="no" 
                     control={<Radio />} 
                     label="No" 
                     onChange={remoteNoChange}
@@ -144,6 +227,7 @@ function AdminYes() {
                 required
                 fullWidth
                 id="email"
+                value={data.company_name}
                 name="company_name"
                 placeholder='Company name*'
                 autoComplete="email"
@@ -156,6 +240,7 @@ function AdminYes() {
                 required
                 fullWidth
                 id="email"
+                value={data.title}
                 name="title"
                 placeholder='Title*'
                 autoComplete="email"
@@ -170,6 +255,7 @@ function AdminYes() {
                 id="email"
                 multiline
                 rows={4}
+                value={data.job_description}
                 name="job_description"
                 placeholder='Job Description*'
                 autoComplete="email"
@@ -179,16 +265,13 @@ function AdminYes() {
               <FormControl fullWidth sx={{ m: 0, mt: 1, minWidth: 120}}>
                 <Select
                   {...(errors && errors.job_type ? { error: true } : {})}
-                  value={''}
+                  value={data.job_type}
                   onChange={handleChange}
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                   name='job_type'
-                  sx={{color: data.job_type ? 'black' : 'darkgrey'}}
+                  sx={{color: 'black'}}
                 >
-                  <MenuItem value="">
-                   {data.job_type ? data.job_type : 'Job Type*'}
-                  </MenuItem>
                   <Divider/>
                   <MenuItem value='Full Time'>Full Time</MenuItem>
                   <Divider/>
@@ -202,6 +285,7 @@ function AdminYes() {
                 required
                 fullWidth
                 id="email"
+                value={data.salary}
                 name="salary"
                 placeholder='Salary*'
                 autoComplete="email"
@@ -213,6 +297,7 @@ function AdminYes() {
                 margin="normal"
                 required
                 fullWidth
+                value={data.location}
                 name="location"
                 placeholder='Location*'
                 id="email"
@@ -226,6 +311,7 @@ function AdminYes() {
                 required
                 fullWidth
                 id="email"
+                value={data.longitude}
                 name="longitude"
                 placeholder='longitude*'
                 autoComplete="email"
@@ -237,6 +323,7 @@ function AdminYes() {
                 margin="normal"
                 required
                 fullWidth
+                value={data.latitude}
                 name="latitude"
                 placeholder='latitude*'
                 id="email"
@@ -246,17 +333,14 @@ function AdminYes() {
               <small style={{color: 'red', fontSize: '1rem'}}>{errors && errors.latitude}</small>
               <FormControl fullWidth sx={{ m: 0, mt: 1, minWidth: 120}}>
                 <Select
-                  value={''}
+                  value={data.industry}
                   onChange={handleChange}
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                   name='industry'
-                  sx={{color: data.industry ? 'black' : 'darkgrey'}}
+                  sx={{color: 'black'}}
                   {...(errors && errors.industry ? { error: true } : {})}
                 >
-                  <MenuItem value="">
-                    {data.industry ? data.industry : 'Industry*'}
-                  </MenuItem>
                   <Divider/>
                   <MenuItem value='tech'>Tech</MenuItem>
                   <Divider/>
@@ -284,16 +368,19 @@ function AdminYes() {
                   fontSize: '1.5rem'
                 }}
               >
-                Submit Job
+                Edit Job
               </Button>
             </Box>
           </Box>
         </Container>
       </ThemeProvider>
     </main>
+            </DialogContent>
+        </BootstrapDialog>
+    </main>
   )
 }
-export default AdminYes
+export default JobEditForm
 
 
 
@@ -306,12 +393,5 @@ export default AdminYes
 
 
 
- 
+  
 
-
-
-
- 
-   
-   
-     
