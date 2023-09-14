@@ -11,25 +11,21 @@ import Divider from '@mui/material/Divider';
 import { useMediaQuery } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import Map from "./Map";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
       padding: theme.spacing(2),
-      // overflow: 'hidden',
     },
     '& .MuiDialogActions-root': {
       padding: theme.spacing(1),
     },
-    '& .MuiPaper-root': {
-      // maxHeight: '100%', 
-      // marginTop: '10rem'
-    },
   }));
-  
+
 
 function DialogBox({ setEditFLag }) {
   
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery('(max-width: 700px)');
   const [open, setOpen] = useState(true);
   const history = useHistory()
   const params = useParams()
@@ -70,15 +66,16 @@ function DialogBox({ setEditFLag }) {
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        scroll='body'
         sx={{backgroundColor: 'rgba(70, 0, 220, 0.6)'}}
         PaperProps={{
           sx: {
-            borderRadius: '10px'  
+            borderRadius: '10px',
           },
         }}
       >
         <DialogTitle
-          sx={{m: 0, pl: 6, pb:  1.5, pt: 7, alignItems: 'center', display: 'flex' }} 
+          sx={{m: 0, pl: isMobile ? 2 : 6, pb:  1.5, pt: 7, alignItems: 'center', display: 'flex' }} 
           id="customized-dialog-title"
         >
           <img width="30" height="30" src="https://img.icons8.com/color/48/qgenda.png" alt="qgenda"/>
@@ -88,7 +85,7 @@ function DialogBox({ setEditFLag }) {
           </p>
         </DialogTitle>
         <DialogTitle 
-          sx={{m: 0, pl: 6, pt: 0,fontSize: '2.7rem',fontFamily: 'Merriweather Sans',color: '#440044'}} 
+          sx={{m: 0, pl: isMobile ? 2 : 6, pt: 0,fontSize: '2.7rem',fontFamily: 'Merriweather Sans',color: '#440044'}} 
           id="customized-dialog-title"
         >
           {selectedJob.title}
@@ -104,7 +101,7 @@ function DialogBox({ setEditFLag }) {
             textTransform: 'none',
             border: 'solid 0.1px darkgrey',
             fontFamily: 'Merriweather Sans',
-            ml: 6,
+            ml: isMobile ? 2 : 6,
             mb: 5,
             fontWeight: 'bold',
             '&:hover': {
@@ -145,7 +142,7 @@ function DialogBox({ setEditFLag }) {
           </main>
           <Divider sx={{paddingTop: '2rem', marginBottom: '4rem'}}/>
           <DialogTitle 
-            sx={{m: 0, pl: 4, pt: 0,fontSize: '1.5rem', fontFamily: 'Merriweather Sans', color: '#440044'}} 
+            sx={{m: 0, pl: isMobile ? 0 : 4, pt: 0,fontSize: '1.5rem', fontFamily: 'Merriweather Sans', color: '#440044'}} 
             id="customized-dialog-title"
           >
             Job Tags
@@ -162,7 +159,7 @@ function DialogBox({ setEditFLag }) {
               fontWeight: 'bold',
               boxShadow: 'none',
               textTransform: 'none',
-              marginLeft: '2rem',
+              marginLeft: isMobile ? '' : '2rem',
               fontFamily: 'Merriweather Sans',
               border: 'solid 0.1px darkgrey',
               width: '9rem',
@@ -197,7 +194,7 @@ function DialogBox({ setEditFLag }) {
             {selectedJob.remote === true ? 'Remote' : 'Not Remote'}
           </Button>
           <DialogTitle 
-            sx={{m: 0, pl: 4, pt: 4,fontSize: '1.3rem', fontFamily: 'Merriweather Sans', color: '#440044'}} 
+            sx={{m: 0, pl: isMobile ? 0 : 4, pt: 4,fontSize: '1.3rem', fontFamily: 'Merriweather Sans', color: '#440044'}} 
             id="customized-dialog-title"
           >
             Job Description
@@ -208,7 +205,7 @@ function DialogBox({ setEditFLag }) {
               marginTop: "0.3rem", 
               fontFamily: 'Merriweather Sans', 
               color: '#440044',
-              marginLeft: '2rem',
+              marginLeft: isMobile ? '' : '2rem',
               fontSize: '1.2rem'
             }}
           >
@@ -218,7 +215,7 @@ function DialogBox({ setEditFLag }) {
             gutterBottom
             color='text.primary'
             sx={{
-              marginLeft: '2rem',
+              marginLeft: isMobile ? '' : '2rem',
               fontSize: '1.32rem',
               fontFamily: 'Merriweather Sans', 
             }}
@@ -226,39 +223,43 @@ function DialogBox({ setEditFLag }) {
             {selectedJob.job_description}
           </Typography>
           <DialogTitle 
-            sx={{m: 0, pl: 4, pt: 4,fontSize: '1.3rem',fontFamily: 'Merriweather Sans',color: '#440044'}} 
+            sx={{m: 0, pl: isMobile ? 0 : 4, pt: 4,fontSize: '1.3rem',fontFamily: 'Merriweather Sans',color: '#440044'}} 
             id="customized-dialog-title"
           >
             Location
           </DialogTitle>
           <Divider sx={{ marginBottom: '1.5rem'}}/>
+          <Map selectedJob={selectedJob}/>
+       
           <p 
             style={{
-              marginTop: "0.3rem", 
+              marginTop: "0.7rem", 
               fontFamily: 'Merriweather Sans', 
               color: '#440044',
-              marginLeft: '2rem',
-              fontSize: '1.2rem',
-              fontWeight: 'bold'
+              marginLeft: isMobile ? '' : '2rem',
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              marginBottom: '0', 
             }}
           >
             {selectedJob.company_name}
           </p>
-          <small
+          <p
             style={{
               fontFamily: 'Merriweather Sans', 
               color: '#302a79',
-              marginLeft: '2rem',
+              marginLeft: isMobile ? '' : '2rem',
               fontSize: '1rem',
             }}
           >
             {selectedJob.location}
-          </small>
+          </p>
+        
         </DialogContent>
         {user.admin === true ? 
-          <section style={{paddingLeft: '1rem'}}>
+          <section style={{paddingLeft: isMobile ? '0rem' : '1rem'}}>
             <DialogTitle 
-              sx={{pt: 4, fontSize: '1.1rem', fontFamily: 'Merriweather Sans', color: '#440044'}} 
+              sx={{pl: isMobile ? 2 : 4 , pt: 4, fontSize: '1.1rem', fontFamily: 'Merriweather Sans', color: '#440044'}} 
               id="customized-dialog-title"
             >
               Admin Actions
@@ -276,7 +277,7 @@ function DialogBox({ setEditFLag }) {
                 fontWeight: 'bold',
                 boxShadow: 'none',
                 textTransform: 'none',
-                marginLeft: '1.3rem',
+                marginLeft: isMobile ? '1rem' : '2rem',
                 fontFamily: 'Merriweather Sans',
                 border: 'solid 0.1px darkgrey',
                 width: '9rem',

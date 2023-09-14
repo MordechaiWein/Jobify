@@ -136,6 +136,7 @@ function handleSubmit(e) {
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"
             open={open}
+            scroll='body'
             sx={{backgroundColor: 'rgba(70, 0, 220, 0.6)'}}
             PaperProps={{
                 sx: {

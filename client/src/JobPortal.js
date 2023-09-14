@@ -80,8 +80,7 @@ function JobPortal() {
                                         sx={{ 
                                             height: '20rem', 
                                             display: 'flex', 
-                                            flexDirection: 'column', 
-                                        
+                                            flexDirection: 'column',  
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 ,ml: 2}}>
