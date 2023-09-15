@@ -8,11 +8,12 @@
 // import Divider from '@mui/material/Divider';
 // import { useMediaQuery } from '@mui/material';
 
-// function Icons() {
+function Icons() {
 
 //   const isMobile = useMediaQuery('(max-width: 600px)');
 
-//     return (
+    return (
+      <h1>hello</h1>
 //     <>
 //        <Typography
 //               component="h1"
@@ -96,7 +97,7 @@
 //           </main>    
 //         </Container>
 //         </>
-//     )
-// }
+    )
+}
 
-// export default Icons
+export default Icons

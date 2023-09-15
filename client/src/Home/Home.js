@@ -3,7 +3,7 @@ import LoggedOutNavigation from '../Navigation/LoggedOutNavigation';
 import Footer from "./Footer";
 import Video from "./Video";
 import Album from "./Album";
-// import Icons from "./Icons";
+import Icons from "./Icons";
 
 function Home() {
 
@@ -13,7 +13,7 @@ function Home() {
          <LoggedOutNavigation/> 
          <Video/>
          <Album/>
-         {/* <Icons/> */}
+         <Icons/>
          <Footer/>
         </main>
     )
