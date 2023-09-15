@@ -18,25 +18,25 @@ function About() {
                         fontSize: isMobile? '5rem' : '7.5vw',
                         marginTop: '12rem',
                         marginRight: '12vw',
-                        marginLeft: '4vw',
-                        color: '#FF4D4D',
+                        marginLeft: '10vw',
+                        color: '#1F699D',
                         fontFamily: 'Merriweather Sans',
                         fontWeight: 'bold',
                     }}
                 >
-                    Unlocking Potential, One Click at a Time.
+                    Unlocking Potential One Click at a Time.
                 </Typography>
             </header>
             <section style={{textAlign: isMobile?  'center' : ""}}>
-                <Container component="section" maxWidth="xl" sx={{marginTop: 8, marginBottom: 12}}>
+                <Container component="section" maxWidth="lg" sx={{marginTop: 8, marginBottom: 8}}>
                     <CssBaseline />
-                    <Typography variant="h2" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
+                    <Typography variant="h3" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
                         About Us
                     </Typography>
-                    <Typography variant="h4" 
+                    <Typography variant="h5" 
                         sx={{
                             paddingTop: '3rem', 
-                            lineHeight: '3.5rem',
+                            lineHeight: '2.5rem',
                             fontFamily: 'Merriweather Sans', 
                             color: '#333'
                         }}
@@ -48,18 +48,19 @@ function About() {
                     </Typography>
                 </Container>
             </section>
-            <section style={{backgroundColor: '#00A89E', minHeight: '50vh',textAlign: isMobile?  'center' : ""}}>
-                <Container component="section" maxWidth="xl" sx={{marginTop: 8, color: 'white'}}>
+            <section style={{backgroundColor: '#e0f2f1',textAlign: isMobile?  'center' : ""}}>
+                <Container component="section" maxWidth="lg" sx={{marginTop: 8, color: '#1F699D'}}>
                     <CssBaseline />
-                    <Typography variant="h2" sx={{fontWeight: 'bold',paddingTop: '5rem',fontFamily: 'Merriweather Sans'}}>
+                    <Typography variant="h3" sx={{fontWeight: 'bold',paddingTop: '4rem',fontFamily: 'Merriweather Sans'}}>
                         Who We Are
                     </Typography>
-                    <Typography variant="h4" 
+                    <Typography variant="h5" 
                         sx={{
                             paddingTop: '3rem', 
-                            lineHeight: '3rem', 
+                            lineHeight: '2.5rem', 
                             fontWeight: 'bold', 
-                            fontFamily: 'Merriweather Sans'
+                            fontFamily: 'Merriweather Sans',
+                            paddingBottom: '5rem'
                             }}
                         >
                         At Jobify, we understand that finding the perfect job is 
@@ -71,15 +72,15 @@ function About() {
                 </Container>
             </section>
             <section style={{textAlign: isMobile?  'center' : ""}}>
-                <Container component="section" maxWidth="xl" sx={{marginTop: 8}}>
+                <Container component="section" maxWidth="lg" sx={{marginTop: 8}}>
                     <CssBaseline />
-                    <Typography variant="h2" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
+                    <Typography variant="h3" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
                         Our Vision
                     </Typography>
-                    <Typography variant="h4" 
+                    <Typography variant="h5" 
                         sx={{
                             paddingTop: '3rem', 
-                            lineHeight: '3.5rem', 
+                            lineHeight: '2.5rem', 
                             fontFamily: 'Merriweather Sans', 
                             color: '#333'
                             }
@@ -93,16 +94,16 @@ function About() {
                     </Typography>
                 </Container>
             </section>
-            <section style={{backgroundColor: '#00A89E', minHeight: '50vh',textAlign: isMobile?  'center' : ""}}>
-                <Container component="section" maxWidth="xl" sx={{marginTop: 8, color: 'white'}}>
+            <section style={{backgroundColor: '#e0f2f1', minHeight: '50vh',textAlign: isMobile?  'center' : ""}}>
+                <Container component="section" maxWidth="lg" sx={{marginTop: 8, color: '#1F699D'}}>
                     <CssBaseline />
-                    <Typography variant="h2" sx={{fontWeight: 'bold', paddingTop: '5rem', fontFamily: 'Merriweather Sans'}}>
+                    <Typography variant="h3" sx={{fontWeight: 'bold', paddingTop: '5rem', fontFamily: 'Merriweather Sans'}}>
                         Why Choose Us
                     </Typography>
-                    <Typography variant="h4" 
+                    <Typography variant="h5" 
                         sx={{
                             paddingTop: '3rem', 
-                            lineHeight: '3rem', 
+                            lineHeight: '2.5rem', 
                             fontWeight: 'bold', 
                             fontFamily: 'Merriweather Sans'
                         }}
@@ -111,9 +112,9 @@ function About() {
                         of job opportunities from various industries and locations. We strive to ensure that 
                         you have access to the most relevant and diverse job listings available.
                     </Typography> 
-                    <Typography variant="h4" 
+                    <Typography variant="h5" 
                         sx={{paddingTop: '2rem', 
-                        lineHeight: '3rem', 
+                        lineHeight: '2.5rem', 
                         fontWeight: 'bold', 
                         fontFamily: 'Merriweather Sans'
                         }}
@@ -122,10 +123,10 @@ function About() {
                         Finding, saving, and applying for jobs has never been easier. You can organize your 
                         job search efficiently with our personalized job board feature.
                     </Typography> 
-                    <Typography variant="h4" 
+                    <Typography variant="h5" 
                         sx={{
                             paddingTop: '2rem', 
-                            lineHeight: '3rem', 
+                            lineHeight: '2.5rem', 
                             fontWeight: 'bold', 
                             fontFamily: 'Merriweather Sans'
                         }}
@@ -134,10 +135,10 @@ function About() {
                         including resume building, interview preparation tips, and career advice. 
                         We empower you to present your best self to potential employers.
                     </Typography> 
-                    <Typography variant="h4" 
+                    <Typography variant="h5" 
                         sx={{
                             paddingTop: '2rem', 
-                            lineHeight: '3rem', 
+                            lineHeight: '2.5rem', 
                             fontWeight: 'bold', 
                             fontFamily: 'Merriweather Sans'
                             }}
@@ -146,10 +147,10 @@ function About() {
                         We employ the latest security measures to safeguard your personal information and ensure a
                         safe browsing experience.
                     </Typography>
-                    <Typography variant="h4"
+                    <Typography variant="h5"
                         sx={{
                             paddingTop: '2rem', 
-                            lineHeight: '3rem', 
+                            lineHeight: '2.5rem', 
                             paddingBottom: '7rem', 
                             fontWeight: 'bold', 
                             fontFamily: 'Merriweather Sans' 
@@ -162,16 +163,16 @@ function About() {
                 </Container>
             </section>
             <section style={{textAlign: isMobile?  'center' : ""}}>
-                <Container component="section" maxWidth="xl" sx={{marginTop: 8}}>
+                <Container component="section" maxWidth="lg" sx={{marginTop: 8}}>
                     <CssBaseline />
-                    <Typography variant="h2" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
+                    <Typography variant="h3" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
                         Join Us on Your Journey
                     </Typography>
-                    <Typography variant="h4" 
+                    <Typography variant="h5" 
                         sx={{
                             paddingTop: '3rem', 
-                            lineHeight: '3rem', 
-                            paddingBottom: '15rem', 
+                            lineHeight: '2.5rem', 
+                            paddingBottom: '10rem', 
                             fontFamily: 'Merriweather Sans',
                             color: '#333' 
                         }}

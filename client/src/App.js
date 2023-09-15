@@ -38,7 +38,7 @@ function App() {
         :
         <main>
           <Switch>
-            <Route exact path='/myboard'>
+            <Route path='/myboard'>
               <MyBoard/>
             </Route>
             <Route exact path='/about'>

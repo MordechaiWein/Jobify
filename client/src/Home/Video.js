@@ -5,7 +5,7 @@ import JobifyMovie from '../Media/JobifyMovie.mp4'
 
 function Video() {
   
-  const isMobile = useMediaQuery('(max-width: 800px)');
+  const isMobile = useMediaQuery('(max-width: 1295px)');
   const movie = JobifyMovie;
   
   return (
@@ -37,32 +37,34 @@ function Video() {
       <div
         style={{
           position: 'absolute',
-          top: '50%',
+          top: isMobile ? '50%' : '37%',
           left: '50%',
           transform: 'translate(-60%, -50%)',
           textAlign: isMobile ? 'center' : '',
-          color: 'white',
-          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.6)',
+          color: 'white', 
+          textShadow: '2px 2px 3px rgba(0, 0, 0, 0.3)' ,
           width: '80%',
+          
         }}
       >
         <h1
           style={{
-            fontSize: isMobile ? '4rem' : '7vw',
+            fontSize: isMobile ? '4rem' : '5vw',
             marginLeft: isMobile ? '3rem' : '7rem',
-            marginRight: isMobile ? '-2.5rem' : '5rem',
-            fontFamily: 'Merriweather Sans'
+            marginRight: isMobile ? '-2.5rem' : '20rem',
+            fontFamily: 'Kanit',
+           
           }}
         >
-          Get ahead with Jobify
+          GET AHEAD WITH JOBIFY
         </h1>
         <h4
           style={{
-            fontSize: isMobile ? '2rem' : '3rem',
+            fontSize: isMobile ? '2rem' : '2.5rem',
             marginLeft: isMobile ? '2rem' : '7rem' ,
-            marginRight: isMobile ? '-4rem' : '10rem',
+            marginRight: isMobile ? '-4rem' : '35rem',
             marginTop: isMobile ? '5rem' : '',
-            fontFamily: 'Merriweather Sans'
+            fontFamily: 'Kanit'
           }}
         >
           We're serving up trusted insights and anonymous conversation, so

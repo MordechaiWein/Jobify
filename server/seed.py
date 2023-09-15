@@ -3,16 +3,17 @@ from models import db, User, Job, Responsibility, Qualification
 
 with app.app_context():
 
-    # print("🧨Deleting everything...")
-    # User.query.delete()
+    print("🧨Deleting everything...")
+    User.query.delete()
+    # user_to_delete = User.query.filter_by(id=39).first()
     # job_to_delete = Job.query.filter_by(id=7).first()
     # Job.query.delete()
     # Responsibility.query.delete()
     # Qualification.query.delete()
 
-    print("🌱Seeding database...")
-    mord = User.query.filter(User.username == "Mordechai").first()
-    mord.admin = True
+    # print("🌱Seeding database...")
+    # mord = User.query.filter(User.username == "Mordechai").first()
+    # mord.admin = True
     # db.session.add_all([
         
     #     Job(title = 'Software Engineer'),
@@ -21,7 +22,7 @@ with app.app_context():
     # ])
 
     # db.session.commit()
-    # db.session.delete(job_to_delete)
+    # db.session.delete(user_to_delete)
     # db.session.delete()
     db.session.commit()
 

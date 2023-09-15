@@ -7,6 +7,7 @@ user_job_join = db.Table(
     "user_job_joins",
     db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
     db.Column("job_id", db.Integer, db.ForeignKey("jobs.id")),
+    db.UniqueConstraint("user_id", "job_id", name="unique_user_job"),
     extend_existing=True,
 )
 
@@ -20,8 +21,10 @@ class User(db.Model, SerializerMixin):
     admin = db.Column(db.Boolean, default=False)
 
     jobs = db.relationship('Job', secondary= user_job_join, back_populates='users')
-    considerations = db.relationship('Consideration', backref='user')
-
+   
+    serialize_rules = ('-jobs.users',)
+   
+  
     def __repr__(self):
         return f"User| id: {self.id}, username: {self.username}, password: {self._password_hash}"
     
@@ -37,17 +40,6 @@ class User(db.Model, SerializerMixin):
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
 
-class Consideration(db.Model, SerializerMixin):
-    __tablename__ = 'considerations'
-
-    id = db.Column(db.Integer, primary_key=True)
-    notes = db.Column(db.String)
-    user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
-
-    serialize_rules = ('-user.considerations',)
-    
-    def __repr__(self):
-        return f"Consideration| id: {self.id}, notes: {self.notes}"
 
 
 class Job(db.Model, SerializerMixin):
@@ -67,11 +59,12 @@ class Job(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=func.now())
     
     users = db.relationship('User', secondary= user_job_join, back_populates='jobs')
+
     responsibilities = db.relationship('Responsibility', backref='job', cascade='all, delete-orphan')
     qualifications = db.relationship('Qualification', backref='job', cascade='all, delete-orphan')
 
     serialize_rules = ('-responsibilities.job', '-qualifications.job')
-
+    
     def __repr__(self):
         return f"Job| id: {self.id}, title: {self.title}"
     

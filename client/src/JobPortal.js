@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState , useContext } from 'react'
 import LoggedInNavigation from "./Navigation/LoggedInNavigation";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -16,11 +16,51 @@ import { MyContext } from "./MyContext";
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import PopUp from './PopUp';
+import Divider from '@mui/material/Divider';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { useMediaQuery } from '@mui/material';
 
 function JobPortal() {
     
     const defaultTheme = createTheme();
     const {jobs} = useContext(MyContext)
+    const [selectedIndustryJobs, setSelectedIndustryJobs] = useState(null)
+    const [name, setName] = useState('')
+    const isMobile = useMediaQuery('(max-width: 600px)');
+
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    }
+    
+
+    const jobsFilteredByIndustry = jobs.filter(job => {
+        if (selectedIndustryJobs === null) {
+          return true
+        }
+        return job.industry === selectedIndustryJobs
+    })
+
+    const organizedJobList = jobsFilteredByIndustry.filter( job => job.title.toLowerCase().includes(name.toLowerCase()))
+    
+    const jobLogos = [
+
+        "https://img.icons8.com/color/48/zigbee.png",
+        "https://img.icons8.com/color/48/microsoft.png",
+        "https://img.icons8.com/fluency/48/logo.png",
+        "https://img.icons8.com/color/48/crunchyroll.png",
+        "https://img.icons8.com/color/48/shutterstock.png"
+    ]
+
+    function handleInputBarChange(event) {
+        setName(event.target.value)
+    }
+  
+    function handleChange(event) {
+        setSelectedIndustryJobs(event.target.value)      
+    }
 
     return (
 
@@ -42,20 +82,23 @@ function JobPortal() {
                                 variant="h2"
                                 color="text.primary"
                                 gutterBottom
+                                sx={{fontFamily: 'Merriweather Sans'}}
                             >
                                 Jobify Job Portal
                             </Typography>
-                            <Typography variant="h5" color="text.secondary" paragraph>
+                            <Typography variant="h5" color="text.secondary" sx={{fontFamily: 'Merriweather Sans'}} paragraph>
                                 Continue your job search.
                             </Typography>
+                            <Divider/>
                             <TextField
+                                onChange={handleInputBarChange}
                                 required
                                 fullWidth
                                 name="animal-search"
                                 placeholder='Search a job title...'
                                 type="text"
                                 id="password"
-                                autoComplete="current-password"
+                                autoComplete="off"
                                 style={{
                                     marginBottom: '2rem', 
                                     marginTop: '4rem',
@@ -69,11 +112,70 @@ function JobPortal() {
                                     )
                                 }}
                             />
+               
+
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                 
+
+         <FormControl  
+         sx={{ m: 0, mt: 1, minWidth: 120,   minWidth: 200,}}
+         variant="standard"
+         >
+                <Select
+                  value={''}
+                  onChange={handleChange}
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                  name='industry'
+       
+                  
+                >
+                  <MenuItem value="">
+                    FILTER BY INDUSTRY
+                  </MenuItem>
+                  <Divider/>
+                  <MenuItem value={null}>All Jobs</MenuItem>
+                  <Divider/>
+                  <MenuItem value='tech'>Tech</MenuItem>
+                  <Divider/>
+                  <MenuItem value='healthcare'>Healthcare</MenuItem>
+                  <Divider/>
+                  <MenuItem value='finance'>Finance</MenuItem>
+                  <Divider/>
+                  <MenuItem value='education'>Education</MenuItem>
+                  <Divider/>
+                  <MenuItem value='entertainment'>Entertainment</MenuItem>
+                </Select>
+              </FormControl>
+                    
+                    </Box>
+                                    
                         </Container>
                     </Box>
                     <Container sx={{ py: 3 }} maxWidth="lg">
+                    {organizedJobList.length === 0 ?
+            
+
+                
+                                <Typography 
+                                style={{
+                                    textAlign: 'center', 
+                                    fontSize: '2.5rem',
+                                    paddingTop: isMobile ? "4rem" : '7rem',
+                                    marginRight: isMobile ? "2rem" : "3rem"
+                                }}
+                            >
+                               <SearchIcon sx={{ fontSize: isMobile ?  60 : 40, marginBottom: isMobile ? "" : '-0.6rem' }}/>
+                                &nbsp;
+                                {isMobile ? <div></div> : "" }
+                                Sorry, we couldn't find any results for that search. Kindly try again.
+                            </Typography>
+                       
+                             : 
+                          
+                       
                             <Grid container spacing={4}>
-                                {jobs.map((job) => (
+                                {organizedJobList.map((job, index) => (
                                 <Grid item key={job.id} xs={12} sm={6} md={4}>
                                 <Link to={`jobportal/${job.id}`}>
                                     <Card
@@ -84,12 +186,15 @@ function JobPortal() {
                                         }}
                                     >
                                         <CardContent sx={{ flexGrow: 1 ,ml: 2}}>
-                                            <img width="48" height="48" src="https://img.icons8.com/color/48/qgenda.png" alt="qgenda"/>
+                                            <img width="48" height="48" 
+                                            src={jobLogos[index % jobLogos.length]}
+                                            alt="qgenda"
+                                            />
                                             <Typography gutterBottom variant="h6" component="h2" 
-                                                sx={{fontWeight: 'bold', color: '#49447f', marginLeft: '0.2rem'}}>
+                                                sx={{fontWeight: 'bold', color: '#49447f', marginLeft: '0.2rem', fontSize: '1.5rem'}}>
                                                 {job.title}
                                             </Typography>
-                                            <Typography sx={{textDecoration: 'underline'}}>
+                                            <Typography sx={{textDecoration: 'underline', fontSize: '1.2rem'}}>
                                                 {job.company_name}
                                             </Typography>
                                             <Typography sx={{paddingTop: "0.5rem"}}>
@@ -121,14 +226,14 @@ function JobPortal() {
                                                     mt: 3, mb: 2 ,
                                                     color: '#DAA520',
                                                     height: '2rem',
-                                                    backgroundColor: '#ffffe6',
+                                                    backgroundColor: '#FFFFD0',
                                                     fontWeight: 'bold',
                                                     boxShadow: 'none',
                                                     textTransform: 'none',
                                                     marginLeft: '4rem',
                                                     border: 'solid 0.1px',
                                                     '&:hover': {
-                                                        backgroundColor: '#ffffe6', 
+                                                        backgroundColor: '#FFFFD0', 
                                                         boxShadow: 'none'
                                                     },
                                                 }}
@@ -139,11 +244,11 @@ function JobPortal() {
                                         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                             <Typography 
                                                 sx={{padding: '0.5rem', color: '#ba68c8', fontWeight: 'bold'}}>
-                                                {job.industry}
+                                                 {job.industry.charAt(0).toUpperCase() + job.industry.slice(1)}
                                             </Typography>
                                             <Typography 
                                                 sx={{marginRight: '1rem', color: '#302a79'}}>
-                                                posted: {job.created_at}
+                                                Posted: {formatDate(job.created_at)}
                                             </Typography>
                                         </div>
                                     </Card>
@@ -151,6 +256,7 @@ function JobPortal() {
                                 </Grid>
                                 ))}
                             </Grid>
+                        }
                     </Container>
                 </main>
             </ThemeProvider>

@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError
 from flask_restful import Resource
 from config import app, db, api, bcrypt
 from datetime import datetime
-from models import db, User, Job, Responsibility, Qualification
+from models import db, User, Job, Responsibility, Qualification, user_job_join
 
 @app.errorhandler(404)
 def not_found(e):
@@ -101,28 +101,8 @@ class Jobs(Resource):
 
     def get(self):
 
-        jobs = Job.query.all()
-        formatted_jobs = []
-        
-        for job in jobs:
-            formatted_created_at = job.created_at.strftime("%B %d, %Y")  
-            formatted_job = {
-                "id": job.id,
-                "company_name": job.company_name,
-                "title": job.title,
-                "job_description": job.job_description,
-                "job_type": job.job_type,
-                "industry": job.industry,
-                "remote": job.remote,
-                "salary": job.salary,
-                "location": job.location,
-                "longitude": job.longitude,
-                "latitude": job.latitude,
-                "created_at": formatted_created_at 
-            }
-            formatted_jobs.append(formatted_job)
-            
-        return formatted_jobs, 200
+        jobs = [job.to_dict() for job in Job.query.all()]  
+        return jobs, 200
 
     def post(self):
 
@@ -281,6 +261,125 @@ class JobByID(Resource):
         except IntegrityError:
             return {'error': '422 Unprocessable Entity'}, 422
 
+class UserJobJoins(Resource):
+
+    def post(self):
+
+        request_json = request.get_json()
+
+        user_id = request_json.get('user_id'),
+        job_id = request_json.get('job_id')
+
+        job = Job.query.filter(Job.id == job_id).first()
+
+        try:
+            user_and_job_connected = user_job_join.insert().values(
+                user_id = user_id,
+                job_id = job_id
+            )
+            db.session.execute(user_and_job_connected)
+            db.session.commit()
+            
+            return job.to_dict(), 201
+                   
+        except IntegrityError:
+            return {'error': 'You have already saved this job to your board.'}, 422
+
+class UserAndJobsByID(Resource):
+
+    def delete(self, id):
+        
+        user_id = session.get('user_id')
+        job = Job.query.filter(Job.id == id).first()
+
+        delete_statement = user_job_join.delete().where(
+            (user_job_join.c.user_id == user_id) & (user_job_join.c.job_id == id)
+        )
+
+        db.session.execute(delete_statement)
+        db.session.commit()
+
+        return job.to_dict(), 200
+
+class Responsibilities(Resource):
+
+    def post(self):
+        
+        request_json = request.get_json()
+        
+        obligation = request_json.get('obligation')
+        job_id = request_json.get('job_id')
+        
+        responsibility = Responsibility(
+            obligation = obligation,
+            job_id = job_id
+        )
+
+        validation_errors = {}
+        try:
+            if not obligation:
+                validation_errors['error'] = 'Please submit a responsibility.'
+            if obligation:
+                if len(obligation) < 25:
+                    validation_errors['error'] = 'Responsibility must be at least 25 characters.'
+                elif len(obligation) >= 25:
+                    responsibilities = Responsibility.query.filter(Responsibility.obligation == obligation, Responsibility.job_id == job_id).all()
+                    if responsibilities:
+                        validation_errors['error'] = ' That Responsibility already exists.'
+
+            if validation_errors:
+                return validation_errors, 422
+
+            db.session.add(responsibility)
+            db.session.commit()
+
+            return responsibility.to_dict(), 201
+        except IntegrityError:
+            return {'error': 'Responsibilities error'}, 422
+
+
+class Qualifications(Resource):
+
+    def post(self):
+
+        request_json = request.get_json()
+
+        prerequisite = request_json.get('prerequisite')
+        job_id = request_json.get('job_id')
+        
+        qualification = Qualification(
+            prerequisite = prerequisite,
+            job_id = job_id
+        )
+
+        validation_errors = {}
+        try:
+            if not prerequisite:
+                validation_errors['error'] = 'Please submit a requirement.'
+            if prerequisite:
+                if len(prerequisite) < 25:
+                    validation_errors['error'] = 'Requirement must be at least 25 characters.'
+                elif len(prerequisite) >= 25:
+                    qualifications = Qualification.query.filter(Qualification.prerequisite == prerequisite, Qualification.job_id == job_id).all()
+                    if qualifications:
+                        validation_errors['error'] = 'That Requirement already exists.'
+
+            if validation_errors:
+                return validation_errors, 422
+                
+            db.session.add(qualification)
+            db.session.commit()
+
+            return qualification.to_dict(), 201
+
+        except IntegrityError:
+            return {'error': 'Qualifications error'}, 422
+            
+
+api.add_resource(Qualifications, '/qualifications', endpoint='qualifications')
+api.add_resource(Responsibilities, '/responsibilities', endpoint='responsibilities')      
+api.add_resource(UserAndJobsByID, '/userjobsjoin/<int:id>', endpoint='UserAndJobsByID')
+api.add_resource(UserJobJoins, '/userjobsjoin', endpoint='UserJobJoins')
 api.add_resource(JobByID, '/jobs/<int:id>', endpoint='jobByID')
 api.add_resource(Jobs, '/jobs', endpoint='jobs')
 api.add_resource(Signup, '/signup', endpoint='signup')

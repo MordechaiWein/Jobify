@@ -23,8 +23,13 @@ function MyProvider({children}) {
 
     useEffect(() => {
         fetch('/jobs')
-        .then(response => response.json())
-        .then(data => setJobs(data))
+        .then((response) => {
+            if (response.ok) {
+                response.json().then(data => {
+                    setJobs(data)
+                })
+            } else {console.log('blank')}
+        })
     },[])
      
     return (

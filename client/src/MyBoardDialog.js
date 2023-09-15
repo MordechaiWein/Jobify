@@ -5,17 +5,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Typography from '@mui/material/Typography';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import { MyContext } from "./MyContext";
 import Divider from '@mui/material/Divider';
-import {useMediaQuery } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import ErrorIcon from '@mui/icons-material/Error';
-import CloseIcon from '@mui/icons-material/Close';
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import Map from "./Map";
-import Qualifications from "./Qualifications";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -26,24 +22,28 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
   }));
 
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
 
-function DialogBox({ setEditFLag }) {
+
+function MyBoardDialog() {
   
   const isMobile = useMediaQuery('(max-width: 700px)');
   const [open, setOpen] = useState(true);
-  const [error, setError] = useState('')
-  const [qualificationFlag, setQualificationFlag] = useState(false)
   const history = useHistory()
   const params = useParams()
-  const {jobs, setJobs, user, setUser} = useContext(MyContext)
+  const {jobs, user, setUser} = useContext(MyContext)
 
   let selectedJob = ''
-
+  
   if (jobs && jobs.length > 0) {
-    selectedJob = jobs.find(job => job.id === parseInt(params.id)) 
+    selectedJob = user.jobs.find(job => job.id === parseInt(params.id)) 
   }
 
-  const responsibilityList = selectedJob && selectedJob.responsibilities ? selectedJob.responsibilities.map(responsibility => 
+  
+  const responsibilityList =  selectedJob && selectedJob.responsibilities ? selectedJob.responsibilities.map(responsibility => 
     <li
       key={responsibility.id}
       style={{paddingBottom: '0.9rem', lineHeight: '32px'}}
@@ -60,58 +60,34 @@ function DialogBox({ setEditFLag }) {
       {qualification.prerequisite}
     </li>
   ) : []
-
-  function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  }
-
-  function handleEditClick() {
-    setEditFLag(true)
-  }
   
+
   function handleClose() {
     setOpen(false)
-    history.push('/jobportal')
+    history.push('/myboard')
   }
 
   function handleClick() {
-    fetch(`/jobs/${selectedJob.id}`, {
+    fetch(`/userjobsjoin/${selectedJob.id}`, {
       method: 'DELETE'
     })
     .then(response => response.json())
     .then(data => {
-      setJobs(jobs.filter(job => job.id !== data.id))
       setUser({...user, jobs: user.jobs.filter(job => job.id !== data.id)})
-      alert('🚨 Job deleted successfully.')
-      history.push('/jobportal')
+      history.push('/myboard')
     })
   }
 
-  function handleSaveClick() {
-    fetch("/userjobsjoin", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        user_id: user.id,
-        job_id: selectedJob.id
-      })
-    })
-    .then((response) => {
-      if (response.ok) {
-        response.json().then(data => {
-          console.log(data)
-          setUser({...user, jobs: [...user.jobs, data]})
-          history.push('/myboard')
-        })
-      } else {
-        response.json().then(data => {
-          console.log(data)
-          setError(data.error)
-        })
-      }
-    })
-  }
+  function handleApplyClick() {
+    alert("We appreciate your interest in applying for this job on our platform.\n" +
+    "However, for the full application process, please visit an\n" +
+    "official website where you can complete real applications seamlessly. Thank you for visiting our application!"
+    );
+}
+
+  if (!selectedJob) {
+    return <Redirect to="/notfound" />;
+    }
 
 
   return (
@@ -132,7 +108,6 @@ function DialogBox({ setEditFLag }) {
           },
         }}
       >
-      
         <DialogTitle
           sx={{m: 0, pl: isMobile ? 2 : 6, pb:  1.5, pt: 7, alignItems: 'center', display: 'flex' }} 
           id="customized-dialog-title"
@@ -149,51 +124,6 @@ function DialogBox({ setEditFLag }) {
         >
           {selectedJob.title}
         </DialogTitle>
-        <Button
-          onClick={handleSaveClick}
-          variant="contained"
-          disableRipple 
-          sx={{
-            width: '6rem',
-            backgroundColor: 'white',
-            color: 'black',
-            boxShadow: 'none',
-            textTransform: 'none',
-            border: 'solid 0.1px darkgrey',
-            fontFamily: 'Merriweather Sans',
-            ml: isMobile ? 2 : 6,
-            mb: error ? 2 : 5,
-            fontWeight: 'bold',
-            '&:hover': {
-              backgroundColor: '#7b1fa2', 
-              color: 'white',
-              boxShadow: 'none'
-            },
-          }}
-        >
-          Save
-        </Button>
-        {error ? 
-        <div style={{display: 'flex', paddingLeft: isMobile ? '1rem' : '3.1rem', alignItems: 'center' }}>
-          <ErrorIcon sx={{color: 'red', marginBottom: '0.2rem'}}/>
-          &nbsp;
-          <p style={{paddingTop: '1rem', color: 'red', fontSize: '1rem'}}>{error}</p>  
-          &nbsp;
-          <CloseIcon
-            fontSize=""
-            sx={{
-              color: 'red',
-              '&:hover': {
-                backgroundColor: 'red', 
-                color: 'white',
-              },
-            }} 
-            onClick={() => setError('')}
-          /> 
-        </div>
-        :
-        ""
-         }
         <Divider/>
         <DialogContent>
           <main style={{display: 'flex', justifyContent: 'space-between'  }}>
@@ -299,7 +229,7 @@ function DialogBox({ setEditFLag }) {
             sx={{
               marginLeft: isMobile ? '' : '2rem',
               fontSize: '1.32rem',
-              fontFamily: 'Merriweather Sans' 
+              fontFamily: 'Merriweather Sans', 
             }}
           >
             {selectedJob.job_description}
@@ -374,15 +304,10 @@ function DialogBox({ setEditFLag }) {
           </p>
         
         </DialogContent>
-        {user.admin === true ? 
+      
           <section style={{paddingLeft: isMobile ? '0rem' : '1rem'}}>
-            <DialogTitle 
-              sx={{pl: isMobile ? 2 : 4 , pt: 4, fontSize: '1.1rem', fontFamily: 'Merriweather Sans', color: '#440044'}} 
-              id="customized-dialog-title"
-            >
-              Admin Actions
-            </DialogTitle>
-            <Divider sx={{ marginBottom: '1.5rem'}}/>
+        
+       
             <Button
               variant="contained"
               disableRipple 
@@ -405,12 +330,16 @@ function DialogBox({ setEditFLag }) {
                 },
               }}
             >
-              <DeleteOutlineIcon/>
+                <section style={{display: 'flex', alignItems: 'center'}}>
+                <DeleteOutlineIcon/>
+                <p style={{paddingTop: '0.25rem'}}>Delete Job</p>
+                </section>
+             
             </Button>
             <Button
               variant="contained"
               disableRipple
-              onClick={handleEditClick} 
+              onClick={handleApplyClick} 
               sx={{ 
                 mb: 2 ,
                 color: 'white',
@@ -420,6 +349,7 @@ function DialogBox({ setEditFLag }) {
                 boxShadow: 'none',
                 marginLeft: '1rem',
                 textTransform: 'none',
+                fontFamily: 'Merriweather Sans',
                 width: '9rem',
                 '&:hover': {
                   backgroundColor: '#e65100', 
@@ -427,58 +357,20 @@ function DialogBox({ setEditFLag }) {
                 },
               }}
             >
-              <EditOutlinedIcon/>
-            </Button>
-            <Button
-              variant="contained"
-              disableRipple
-              onClick={() => setQualificationFlag(!qualificationFlag)} 
-              sx={{ 
-                mb: 2 ,
-                color: 'white',
-                height: '2rem',
-                backgroundColor: '#4caf50',
-                fontWeight: 'bold',
-                boxShadow: 'none',
-                marginLeft: '1rem',
-                textTransform: 'none',
-                width: '9rem',
-                '&:hover': {
-                  backgroundColor: '#2e7d32', 
-                  boxShadow: 'none'
-                },
-              }}
-            >
-              <AddOutlinedIcon/>
-            </Button>
-            {qualificationFlag ?
-              <Qualifications selectedJob={selectedJob} setQualificationFlag={setQualificationFlag}/>
-              : 
-              ""
+                <section style={{display: 'flex', alignItems: 'center', marginRight: '1rem'}}>
+                <CheckOutlinedIcon/>
+                 <p style={{paddingTop: '0.25rem'}}>Apply</p>
+                </section>
+             
               
-            }
+            </Button>
+      
           </section>
-          :
-          ""
-        }
-   
+       
+          
+        
       </BootstrapDialog>
     </main>
   )
 }
-export default DialogBox
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-  
+export default MyBoardDialog

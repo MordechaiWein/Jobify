@@ -36,7 +36,7 @@ function Album() {
             </Typography>
           </Container>
         </Box>
-        <Container sx={{ py: 3, marginBottom: '10rem' }} maxWidth="lg">
+        <Container sx={{ py: 3, marginBottom: '9rem' }} maxWidth="lg">
           <Grid container spacing={3}>
             <Grid item  xs={6} sm={6} md={3}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
