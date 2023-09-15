@@ -45,14 +45,14 @@ function JobPortal() {
 
     const organizedJobList = jobsFilteredByIndustry.filter( job => job.title.toLowerCase().includes(name.toLowerCase()))
     
-    const jobLogos = [
+    // const jobLogos = [
 
-        "https://img.icons8.com/color/48/zigbee.png",
-        "https://img.icons8.com/color/48/microsoft.png",
-        "https://img.icons8.com/fluency/48/logo.png",
-        "https://img.icons8.com/color/48/crunchyroll.png",
-        "https://img.icons8.com/color/48/shutterstock.png"
-    ]
+    //     "https://img.icons8.com/color/48/zigbee.png",
+    //     "https://img.icons8.com/color/48/microsoft.png",
+    //     "https://img.icons8.com/fluency/48/logo.png",
+    //     "https://img.icons8.com/color/48/crunchyroll.png",
+    //     "https://img.icons8.com/color/48/shutterstock.png"
+    // ]
 
     function handleInputBarChange(event) {
         setName(event.target.value)
@@ -187,7 +187,7 @@ function JobPortal() {
                                     >
                                         <CardContent sx={{ flexGrow: 1 ,ml: 2}}>
                                             <img width="48" height="48" 
-                                            src={jobLogos[index % jobLogos.length]}
+                                            src='https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcSgU4nPfMA2Ss-LB1u-cfjkd3JCEsyeyaLqufqktH0cl4DfeyvjoGMubCIvYW5OwwpB9iMBWMNAvl3qiwA'
                                             alt="qgenda"
                                             />
                                             <Typography gutterBottom variant="h6" component="h2" 
