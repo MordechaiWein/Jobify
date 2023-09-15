@@ -100,13 +100,11 @@ function DialogBox({ setEditFLag }) {
     .then((response) => {
       if (response.ok) {
         response.json().then(data => {
-          console.log(data)
           setUser({...user, jobs: [...user.jobs, data]})
           history.push('/myboard')
         })
       } else {
         response.json().then(data => {
-          console.log(data)
           setError(data.error)
         })
       }
