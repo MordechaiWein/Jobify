@@ -109,7 +109,7 @@ function MyBoardDialog() {
           sx={{m: 0, pl: isMobile ? 2 : 6, pb:  1.5, pt: 7, alignItems: 'center', display: 'flex' }} 
           id="customized-dialog-title"
         >
-          <img width="30" height="30" src="https://img.icons8.com/color/48/qgenda.png" alt="logo image"/>
+          <img width="30" height="30" src="https://img.icons8.com/color/48/qgenda.png" alt="logo"/>
           &nbsp;
           <p style={{marginTop: "0.3rem", fontFamily: 'Merriweather Sans', color: '#302a79'}}>
             {selectedJob.company_name} 

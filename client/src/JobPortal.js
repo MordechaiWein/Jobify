@@ -172,7 +172,7 @@ function JobPortal() {
                                                 }}
                                             >
                                                 <CardContent sx={{ flexGrow: 1 ,ml: 2}}>
-                                                    <img width="48" height="48" src={jobLogos[index % jobLogos.length]} alt="logo image"/>
+                                                    <img width="48" height="48" src={jobLogos[index % jobLogos.length]} alt="logo"/>
                                                     <Typography gutterBottom variant="h6" component="h2" 
                                                         sx={{fontWeight: 'bold', color: '#49447f', marginLeft: '0.2rem', fontSize: '1.5rem'}}>
                                                         {job.title}
