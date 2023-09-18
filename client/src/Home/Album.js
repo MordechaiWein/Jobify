@@ -74,7 +74,7 @@ function Album() {
                     height: '20rem',
                   }}
                   image="https://media.istockphoto.com/id/1347652268/photo/group-of-colleagues-celebrating-success.jpg?s=612x612&w=0&k=20&c=dojtkf9ItX21j3jtlGOGpbKDs320TTAuofoGnNSZD8Y="
-                  />
+                />
               </Card>
             </Grid>
             <Grid item  xs={6} sm={6} md={3}>
@@ -87,7 +87,7 @@ function Album() {
                     height: '20rem',
                   }}
                   image="https://media.istockphoto.com/id/1356070782/photo/businessman-and-businesswoman-smiling-looking-at-phone.jpg?s=612x612&w=0&k=20&c=XDI9agia8LM24eInT_eEK3-N2XA7MMgmJgzGi6QJgzU="
-                  />
+                />
               </Card>
             </Grid>
           </Grid>

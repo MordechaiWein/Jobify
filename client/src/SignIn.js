@@ -51,48 +51,46 @@ function SignIn() {
     password: ''
   })
   
+  function handleClickShowPassword() {
+    setShowPassword(!showPassword)
+  } 
   
-    function handleClickShowPassword() {
-        setShowPassword(!showPassword)
-    } 
-
-    function handleMouseDownPassword(event) {
-        event.preventDefault()
-    }
-
-    function handleChange(event) {
-      setError([])
-      setData({...data, [event.target.name] : event.target.value})
-    }
-
-
-    function handleSubmit(e) {
-      setSignInLoading(true)
-      e.preventDefault()
-      fetch('/login', {
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
-      })
-      .then((response) => {
-        if (response.ok) {
-          response.json().then(data => {
-            setUser(data)
-            setSignInLoading(false)
-            history.push("/myboard")
-          })
-        } else {
-          response.json().then(data => {
-            setError(data.error)
-            setSignInLoading(false)
-          })
-        }
-      })
-    }
+  function handleMouseDownPassword(event) {
+    event.preventDefault()
+  }
+  
+  function handleChange(event) {
+    setError([])
+    setData({...data, [event.target.name] : event.target.value})
+  }
+  
+  function handleSubmit(e) {
+    setSignInLoading(true)
+    e.preventDefault()
+    fetch('/login', {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    })
+    .then((response) => {
+      if (response.ok) {
+        response.json().then(data => {
+          setUser(data)
+          setSignInLoading(false)
+          history.push("/myboard")
+        })
+      } else {
+        response.json().then(data => {
+          setError(data.error)
+          setSignInLoading(false)
+        })
+      }
+    })
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
-        <LoggedOutNavigation/>
+      <LoggedOutNavigation/>
       <Container component="main" maxWidth="xs" sx={{paddingTop: '5rem'}}>
         <CssBaseline />
         <Box
@@ -103,21 +101,21 @@ function SignIn() {
             alignItems: 'center',
           }}
         >
-            <img width="64" height="64" 
-                src="https://img.icons8.com/glyph-neue/64/1f699d/goal--v1.png" alt="goal--v1"
-                style={{marginBottom: '2rem'}}
-            />
+          <img width="64" height="64" style={{marginBottom: '2rem'}}
+            src="https://img.icons8.com/glyph-neue/64/1f699d/goal--v1.png" alt="goal--v1"
+          />
           <Typography component="h1" variant="h4" 
-            sx={{fontWeight: 'bold', 
-            color: "#1F699D",
-            fontFamily: 'Merriweather Sans',
-            fontSize: '2.5rem'
-            }}>
+            sx={{
+              fontWeight: 'bold', 
+              color: "#1F699D",
+              fontFamily: 'Merriweather Sans',
+              fontSize: '2.5rem'
+            }}
+          >
             Log in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
-            
               margin="normal"
               required
               fullWidth
@@ -142,23 +140,23 @@ function SignIn() {
               name="password"
               autoComplete="email"
               type={showPassword ? 'text' : 'password'}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    ),
-                    style: {
-                        borderRadius: "16px",
-                    }
-                }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                style: {
+                  borderRadius: "16px",
+                }
+              }}
             />
             <small style={{color: 'red', fontSize: '1.2rem', marginLeft: '0.5rem'}}>{error}</small>
             <Button
@@ -173,7 +171,7 @@ function SignIn() {
                 fontWeight: 'bold',
                 fontSize:'1.2rem',
                 fontFamily: 'Merriweather Sans'
-            }}
+              }}
             >
              {signInLoading === true ? 'Loading...' : 'Log In'}
             </Button>
@@ -182,7 +180,6 @@ function SignIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
-  );
+  )
 }
-
 export default SignIn

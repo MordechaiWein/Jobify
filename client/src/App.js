@@ -15,7 +15,7 @@ function App() {
   const {user, isLoading} = useContext(MyContext)
 
   if (isLoading === true) return <div></div>
-
+  
   return (
     <>
       {user === null ? 

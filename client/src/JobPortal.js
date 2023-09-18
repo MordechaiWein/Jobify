@@ -63,7 +63,6 @@ function JobPortal() {
     }
 
     return (
-
         <main>
             <LoggedInNavigation/>
             <ThemeProvider theme={defaultTheme}>
@@ -112,52 +111,41 @@ function JobPortal() {
                                     )
                                 }}
                             />
-               
-
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                 
-
-         <FormControl  
-         sx={{ m: 0, mt: 1, minWidth: 200}}
-         variant="standard"
-         >
-                <Select
-                  value={''}
-                  onChange={handleChange}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                  name='industry'
-       
-                  
-                >
-                  <MenuItem value="">
-                    FILTER BY INDUSTRY
-                  </MenuItem>
-                  <Divider/>
-                  <MenuItem value={null}>All Jobs</MenuItem>
-                  <Divider/>
-                  <MenuItem value='tech'>Tech</MenuItem>
-                  <Divider/>
-                  <MenuItem value='healthcare'>Healthcare</MenuItem>
-                  <Divider/>
-                  <MenuItem value='finance'>Finance</MenuItem>
-                  <Divider/>
-                  <MenuItem value='education'>Education</MenuItem>
-                  <Divider/>
-                  <MenuItem value='entertainment'>Entertainment</MenuItem>
-                </Select>
-              </FormControl>
-                    
-                    </Box>
-                                    
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <FormControl 
+                                    sx={{ m: 0, mt: 1, minWidth: 200}}
+                                    variant="standard"
+                                >
+                                    <Select
+                                        value={''}
+                                        onChange={handleChange}
+                                        displayEmpty
+                                        inputProps={{ 'aria-label': 'Without label' }}
+                                        name='industry'
+                                    >
+                                        <MenuItem value="">
+                                            FILTER BY INDUSTRY
+                                        </MenuItem>
+                                        <Divider/>
+                                        <MenuItem value={null}>All Jobs</MenuItem>
+                                        <Divider/>
+                                        <MenuItem value='tech'>Tech</MenuItem>
+                                        <Divider/>
+                                        <MenuItem value='healthcare'>Healthcare</MenuItem>
+                                        <Divider/>
+                                        <MenuItem value='finance'>Finance</MenuItem>
+                                        <Divider/>
+                                        <MenuItem value='education'>Education</MenuItem>
+                                        <Divider/>
+                                        <MenuItem value='entertainment'>Entertainment</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
                         </Container>
                     </Box>
                     <Container sx={{ py: 3 }} maxWidth="lg">
-                    {organizedJobList.length === 0 ?
-            
-
-                
-                                <Typography 
+                        {organizedJobList.length === 0 ?
+                            <Typography 
                                 style={{
                                     textAlign: 'center', 
                                     fontSize: '2.5rem',
@@ -166,95 +154,89 @@ function JobPortal() {
                                     marginBottom: isMobile ? '10rem' : ''
                                 }}
                             >
-                               <SearchIcon sx={{ fontSize: isMobile ?  60 : 40, marginBottom: isMobile ? "" : '-0.6rem' }}/>
+                                <SearchIcon sx={{ fontSize: isMobile ?  60 : 40, marginBottom: isMobile ? "" : '-0.6rem' }}/>
                                 &nbsp;
                                 {isMobile ? <div></div> : "" }
                                 Sorry, we couldn't find any results for that search. Kindly try again.
                             </Typography>
-                       
-                             : 
-                          
-                       
+                            : 
                             <Grid container spacing={4}>
                                 {organizedJobList.map((job, index) => (
-                                <Grid item key={job.id} xs={12} sm={6} md={4}>
-                                <Link to={`jobportal/${job.id}`}>
-                                    <Card
-                                        sx={{ 
-                                            height: '20rem', 
-                                            display: 'flex', 
-                                            flexDirection: 'column',  
-                                        }}
-                                    >
-                                        <CardContent sx={{ flexGrow: 1 ,ml: 2}}>
-                                            <img width="48" height="48" 
-                                            src={jobLogos[index % jobLogos.length]}
-                                            alt="qgenda"
-                                            />
-                                            <Typography gutterBottom variant="h6" component="h2" 
-                                                sx={{fontWeight: 'bold', color: '#49447f', marginLeft: '0.2rem', fontSize: '1.5rem'}}>
-                                                {job.title}
-                                            </Typography>
-                                            <Typography sx={{textDecoration: 'underline', fontSize: '1.2rem'}}>
-                                                {job.company_name}
-                                            </Typography>
-                                            <Typography sx={{paddingTop: "0.5rem"}}>
-                                                {job.location}
-                                            </Typography>
-                                            <Button
-                                                variant="contained"
-                                                disableRipple 
+                                    <Grid item key={job.id} xs={12} sm={6} md={4}>
+                                        <Link to={`jobportal/${job.id}`}>
+                                            <Card
                                                 sx={{ 
-                                                    mt: 3, mb: 2 ,
-                                                    color: 'red',
-                                                    height: '2rem',
-                                                    backgroundColor: 'mistyrose',
-                                                    fontWeight: 'bold',
-                                                    boxShadow: 'none',
-                                                    textTransform: 'none',
-                                                    '&:hover': {
-                                                        backgroundColor: 'mistyrose', 
-                                                        boxShadow: 'none'
-                                                    },
+                                                    height: '20rem', 
+                                                    display: 'flex', 
+                                                    flexDirection: 'column',  
                                                 }}
                                             >
-                                                {job.remote === true ? '👨🏻‍💻 Remote' : 'Not Remote'}
-                                            </Button>
-                                            <Button
-                                                variant="contained"
-                                                disableRipple 
-                                                sx={{ 
-                                                    mt: 3, mb: 2 ,
-                                                    color: '#DAA520',
-                                                    height: '2rem',
-                                                    backgroundColor: '#FFFFD0',
-                                                    fontWeight: 'bold',
-                                                    boxShadow: 'none',
-                                                    textTransform: 'none',
-                                                    marginLeft: '4rem',
-                                                    border: 'solid 0.1px',
-                                                    '&:hover': {
-                                                        backgroundColor: '#FFFFD0', 
-                                                        boxShadow: 'none'
-                                                    },
-                                                }}
-                                            >
-                                                {job.job_type}
-                                            </Button>
-                                        </CardContent>
-                                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                                            <Typography 
-                                                sx={{padding: '0.5rem', color: '#ba68c8', fontWeight: 'bold'}}>
-                                                 {job.industry.charAt(0).toUpperCase() + job.industry.slice(1)}
-                                            </Typography>
-                                            <Typography 
-                                                sx={{marginRight: '1rem', color: '#302a79'}}>
-                                                Posted: {formatDate(job.created_at)}
-                                            </Typography>
-                                        </div>
-                                    </Card>
-                                </Link>
-                                </Grid>
+                                                <CardContent sx={{ flexGrow: 1 ,ml: 2}}>
+                                                    <img width="48" height="48" src={jobLogos[index % jobLogos.length]} alt="logo image"/>
+                                                    <Typography gutterBottom variant="h6" component="h2" 
+                                                        sx={{fontWeight: 'bold', color: '#49447f', marginLeft: '0.2rem', fontSize: '1.5rem'}}>
+                                                        {job.title}
+                                                    </Typography>
+                                                    <Typography sx={{textDecoration: 'underline', fontSize: '1.2rem'}}>
+                                                        {job.company_name}
+                                                    </Typography>
+                                                    <Typography sx={{paddingTop: "0.5rem"}}>
+                                                        {job.location}
+                                                    </Typography>
+                                                    <Button
+                                                        variant="contained"
+                                                        disableRipple 
+                                                        sx={{ 
+                                                            mt: 3, mb: 2 ,
+                                                            color: 'red',
+                                                            height: '2rem',
+                                                            backgroundColor: 'mistyrose',
+                                                            fontWeight: 'bold',
+                                                            boxShadow: 'none',
+                                                            textTransform: 'none',
+                                                            '&:hover': {
+                                                                backgroundColor: 'mistyrose', 
+                                                                boxShadow: 'none'
+                                                            },
+                                                        }}
+                                                    >
+                                                        {job.remote === true ? '👨🏻‍💻 Remote' : 'Not Remote'}
+                                                    </Button>
+                                                    <Button
+                                                        variant="contained"
+                                                        disableRipple 
+                                                        sx={{ 
+                                                            mt: 3, mb: 2 ,
+                                                            color: '#DAA520',
+                                                            height: '2rem',
+                                                            backgroundColor: '#FFFFD0',
+                                                            fontWeight: 'bold',
+                                                            boxShadow: 'none',
+                                                            textTransform: 'none',
+                                                            marginLeft: '4rem',
+                                                            border: 'solid 0.1px',
+                                                            '&:hover': {
+                                                                backgroundColor: '#FFFFD0', 
+                                                                boxShadow: 'none'
+                                                            },
+                                                        }}
+                                                    >
+                                                        {job.job_type}
+                                                    </Button>
+                                                </CardContent>
+                                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                                    <Typography 
+                                                        sx={{padding: '0.5rem', color: '#ba68c8', fontWeight: 'bold'}}>
+                                                        {job.industry.charAt(0).toUpperCase() + job.industry.slice(1)}
+                                                    </Typography>
+                                                    <Typography 
+                                                        sx={{marginRight: '1rem', color: '#302a79'}}>
+                                                        Posted: {formatDate(job.created_at)}
+                                                    </Typography>
+                                                </div>
+                                            </Card>
+                                        </Link>
+                                    </Grid>
                                 ))}
                             </Grid>
                         }
@@ -264,8 +246,7 @@ function JobPortal() {
             <Route path={'/jobportal/:id'}>
               <PopUp/>
             </Route>
-        </main>             
-
+        </main>
     ) 
 }
 export default JobPortal

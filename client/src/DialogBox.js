@@ -27,13 +27,12 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
   }));
 
-
-
 function DialogBox({ setEditFLag }) {
   
   const isMobile = useMediaQuery('(max-width: 700px)');
   const [open, setOpen] = useState(true);
   const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
   const [qualificationFlag, setQualificationFlag] = useState(false)
   const history = useHistory()
   const params = useParams()
@@ -45,40 +44,38 @@ function DialogBox({ setEditFLag }) {
     selectedJob = jobs.find(job => job.id === parseInt(params.id)) 
   }
 
-
   const responsibilityList = selectedJob && selectedJob.responsibilities ? selectedJob.responsibilities.map(responsibility => 
     <Tooltip 
-    key={responsibility.id}
+      key={responsibility.id}
       title={user.admin === true ? 'Delete' : ''} 
       placement="top-start" arrow 
       onClick={() => responsibilityEraseClick(responsibility.id)}
-    >  
-    <li 
-
-      key={responsibility.id} 
-      style={{paddingBottom: '0.9rem', lineHeight: '32px',}}
-    >
-      {responsibility.obligation}
-    </li>
-
+    > 
+      <li 
+        key={responsibility.id} 
+        style={{paddingBottom: '0.9rem', lineHeight: '32px'}}
+      >
+        {responsibility.obligation}
+      </li>
     </Tooltip>
 
   ) : []
 
   const qualificationList = selectedJob && selectedJob.qualifications ? selectedJob.qualifications.map(qualification => 
     <Tooltip 
-    key={qualification.id}
+      key={qualification.id}
       title={user.admin === true ? 'Delete' : ''} 
       placement="top-start" arrow 
       onClick={() => qualificationEraseClick(qualification.id)}
-    >  
-    <li
-      key={qualification.id}
-      style={{paddingBottom: '0.9rem', lineHeight: '32px'}}
     >
-      {qualification.prerequisite}
-    </li>
+      <li
+        key={qualification.id}
+        style={{paddingBottom: '0.9rem', lineHeight: '32px'}}
+      >
+        {qualification.prerequisite}
+      </li>
     </Tooltip>
+    
   ) : []
 
   function formatDate(dateString) {
@@ -91,8 +88,17 @@ function DialogBox({ setEditFLag }) {
       fetch(`/responsibilities/${id}`, {
         method: 'DELETE'
       })
-      .then(response => response.json())
-      .then(data => deleteResponsibility(data))
+      .then((response) => {
+        if (response.ok) {
+          response.json().then(data => {
+            deleteResponsibility(data)
+          })
+        } else {
+          response.json().then(data => {
+            alert(data.note)
+          })
+        }
+      })
     }  
   }
 
@@ -101,8 +107,17 @@ function DialogBox({ setEditFLag }) {
       fetch(`/qualifications/${id}`, {
         method: 'DELETE'
       })
-      .then(response => response.json())
-      .then(data => deleteQualification(data))
+      .then((response) => {
+        if (response.ok) {
+          response.json().then(data => {
+            deleteQualification(data)
+          })
+        } else {
+          response.json().then(data => {
+            alert(data.note)
+          })
+        }
+      })
     }  
   }
 
@@ -159,12 +174,19 @@ function DialogBox({ setEditFLag }) {
     fetch(`/jobs/${selectedJob.id}`, {
       method: 'DELETE'
     })
-    .then(response => response.json())
-    .then(data => {
-      setJobs(jobs.filter(job => job.id !== data.id))
-      setUser({...user, jobs: user.jobs.filter(job => job.id !== data.id)})
-      alert('🚨 Job deleted successfully.')
-      history.push('/jobportal')
+    .then((response) =>  {
+      if (response.ok) {
+        response.json().then(data => {
+          setJobs(jobs.filter(job => job.id !== data.id))
+          setUser({...user, jobs: user.jobs.filter(job => job.id !== data.id)})
+          alert('🚨 Job deleted successfully.')
+          history.push('/jobportal')
+        })
+      } else {
+        response.json().then(data => {
+          setMessage(data.message)
+        })
+      }
     })
   }
 
@@ -191,7 +213,6 @@ function DialogBox({ setEditFLag }) {
     })
   }
 
-
   return (
     <main>
       <BootstrapDialog 
@@ -210,7 +231,6 @@ function DialogBox({ setEditFLag }) {
           },
         }}
       >
-      
         <DialogTitle
           sx={{m: 0, pl: isMobile ? 2 : 6, pb:  1.5, pt: 7, alignItems: 'center', display: 'flex' }} 
           id="customized-dialog-title"
@@ -252,26 +272,26 @@ function DialogBox({ setEditFLag }) {
           Save
         </Button>
         {error ? 
-        <div style={{display: 'flex', paddingLeft: isMobile ? '1rem' : '3.1rem', alignItems: 'center' }}>
-          <ErrorIcon sx={{color: 'red', marginBottom: '0.2rem'}}/>
-          &nbsp;
-          <p style={{paddingTop: '1rem', color: 'red', fontSize: '1rem'}}>{error}</p>  
-          &nbsp;
-          <CloseIcon
-            fontSize=""
-            sx={{
-              color: 'red',
-              '&:hover': {
-                backgroundColor: 'red', 
-                color: 'white',
-              },
-            }} 
-            onClick={() => setError('')}
-          /> 
-        </div>
-        :
-        ""
-         }
+          <div style={{display: 'flex', paddingLeft: isMobile ? '1rem' : '3.1rem', alignItems: 'center' }}>
+            <ErrorIcon sx={{color: 'red', marginBottom: '0.2rem'}}/>
+            &nbsp;
+            <p style={{paddingTop: '1rem', color: 'red', fontSize: '1rem'}}>{error}</p> 
+            &nbsp;
+            <CloseIcon 
+              fontSize=""
+              sx={{
+                color: 'red',
+                '&:hover': {
+                  backgroundColor: 'red', 
+                  color: 'white',
+                },
+              }} 
+              onClick={() => setError('')}
+            />
+          </div>
+          :
+          ""
+        }
         <Divider/>
         <DialogContent>
           <main style={{display: 'flex', justifyContent: 'space-between'  }}>
@@ -408,17 +428,17 @@ function DialogBox({ setEditFLag }) {
             {qualificationList.length > 0 ? 'JOB QUALIFICATIONS:' : ''}
           </DialogTitle>
           <ul 
-              style={{
-                wordWrap: 'break-word',
-                marginLeft: isMobile ? -25 : '0.7rem', 
-                fontSize: '18px',
-                color: 'rgba(25,4,69,0.9)',
-                fontFamily: 'Merriweather Sans',
-                marginTop: '1rem',
-              }}
-            >
-              {qualificationList}
-            </ul>
+            style={{
+              wordWrap: 'break-word',
+              marginLeft: isMobile ? -25 : '0.7rem', 
+              fontSize: '18px',
+              color: 'rgba(25,4,69,0.9)',
+              fontFamily: 'Merriweather Sans',
+              marginTop: '1rem',
+            }}
+          >
+            {qualificationList}
+          </ul>
           <DialogTitle 
             sx={{m: 0, pl: isMobile ? 0 : 4, pt: 4,fontSize: '1.3rem',fontFamily: 'Merriweather Sans',color: '#440044'}} 
             id="customized-dialog-title"
@@ -427,7 +447,6 @@ function DialogBox({ setEditFLag }) {
           </DialogTitle>
           <Divider sx={{ marginBottom: '1.5rem'}}/>
           <Map selectedJob={selectedJob}/>
-       
           <p 
             style={{
               marginTop: "0.7rem", 
@@ -451,7 +470,6 @@ function DialogBox({ setEditFLag }) {
           >
             {selectedJob.location}
           </p>
-        
         </DialogContent>
         {user.admin === true ? 
           <section style={{paddingLeft: isMobile ? '0rem' : '1rem'}}>
@@ -530,17 +548,43 @@ function DialogBox({ setEditFLag }) {
             >
               <AddOutlinedIcon/>
             </Button>
+            <div style={{display: 'flex', paddingLeft: '2rem'}}>
+              <p
+                style={{
+                  color: 'red', 
+                  fontSize: '1.2rem', 
+                  paddingBottom: message ? '1rem' : ''
+                }}
+              >
+                {message}
+              </p>
+              {message ? 
+                <CloseIcon 
+                  onClick={() => setMessage('')}
+                  sx={{color: 'red',
+                    marginTop: '1rem', 
+                    marginLeft: '3rem', 
+                    marginRight: '20rem',
+                    '&:hover': {
+                      backgroundColor: 'red', 
+                      color: 'white',
+                      borderRadius: '15px'
+                    },
+                  }}
+                />
+                :
+                ""
+              }
+            </div>
             {qualificationFlag ?
               <Qualifications selectedJob={selectedJob} setQualificationFlag={setQualificationFlag}/>
               : 
               ""
-              
             }
           </section>
           :
           ""
         }
-   
       </BootstrapDialog>
     </main>
   )

@@ -21,12 +21,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
       padding: theme.spacing(1),
     },
   }));
-
-  function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  }
-
+  
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
 
 function MyBoardDialog() {
   
@@ -42,7 +41,6 @@ function MyBoardDialog() {
     selectedJob = user.jobs.find(job => job.id === parseInt(params.id)) 
   }
 
-  
   const responsibilityList =  selectedJob && selectedJob.responsibilities ? selectedJob.responsibilities.map(responsibility => 
     <li
       key={responsibility.id}
@@ -61,7 +59,6 @@ function MyBoardDialog() {
     </li>
   ) : []
   
-
   function handleClose() {
     setOpen(false)
     history.push('/myboard')
@@ -79,17 +76,17 @@ function MyBoardDialog() {
   }
 
   function handleApplyClick() {
-    alert("We appreciate your interest in applying for this job on our platform.\n" +
-    "However, for the full application process, please visit an\n" +
-    "official website where you can complete real applications seamlessly. Thank you for visiting our application!"
+    alert(
+      "We appreciate your interest in applying for this job on our platform.\n" +
+      "However, for the full application process, please visit an\n" +
+      "official website where you can complete real applications seamlessly. Thank you for visiting our application!"
     );
-}
-
+  }
+  
   if (!selectedJob) {
     return <Redirect to="/notfound" />;
-    }
-
-
+  }
+  
   return (
     <main>
       <BootstrapDialog 
@@ -112,7 +109,7 @@ function MyBoardDialog() {
           sx={{m: 0, pl: isMobile ? 2 : 6, pb:  1.5, pt: 7, alignItems: 'center', display: 'flex' }} 
           id="customized-dialog-title"
         >
-          <img width="30" height="30" src="https://img.icons8.com/color/48/qgenda.png" alt="qgenda"/>
+          <img width="30" height="30" src="https://img.icons8.com/color/48/qgenda.png" alt="logo image"/>
           &nbsp;
           <p style={{marginTop: "0.3rem", fontFamily: 'Merriweather Sans', color: '#302a79'}}>
             {selectedJob.company_name} 
@@ -240,18 +237,18 @@ function MyBoardDialog() {
           >
             {responsibilityList.length > 0 ? 'JOB RESPONSIBILITIES:' : ''}
           </DialogTitle>
-            <ul 
-              style={{
-                wordWrap: 'break-word',
-                marginLeft: isMobile ? -25 : '0.7rem', 
-                fontSize: '18px',
-                color: 'rgba(25,4,69,0.9)',
-                fontFamily: 'Merriweather Sans',
-                marginTop: '1rem',
-              }}
-            >
-              {responsibilityList}
-            </ul>
+          <ul 
+            style={{
+              wordWrap: 'break-word',
+              marginLeft: isMobile ? -25 : '0.7rem', 
+              fontSize: '18px',
+              color: 'rgba(25,4,69,0.9)',
+              fontFamily: 'Merriweather Sans',
+              marginTop: '1rem',
+            }}
+          >
+            {responsibilityList}
+          </ul>
           <DialogTitle 
             sx={{m: 0, pl: isMobile ? 0 : 4, pt: 2,fontSize: '1.4rem',fontFamily: 'Merriweather Sans',color: '#440044'}} 
             id="customized-dialog-title"
@@ -259,17 +256,17 @@ function MyBoardDialog() {
             {qualificationList.length > 0 ? 'JOB QUALIFICATIONS:' : ''}
           </DialogTitle>
           <ul 
-              style={{
-                wordWrap: 'break-word',
-                marginLeft: isMobile ? -25 : '0.7rem', 
-                fontSize: '18px',
-                color: 'rgba(25,4,69,0.9)',
-                fontFamily: 'Merriweather Sans',
-                marginTop: '1rem',
-              }}
-            >
-              {qualificationList}
-            </ul>
+            style={{
+              wordWrap: 'break-word',
+              marginLeft: isMobile ? -25 : '0.7rem', 
+              fontSize: '18px',
+              color: 'rgba(25,4,69,0.9)',
+              fontFamily: 'Merriweather Sans',
+              marginTop: '1rem',
+            }}
+          >
+            {qualificationList}
+          </ul>
           <DialogTitle 
             sx={{m: 0, pl: isMobile ? 0 : 4, pt: 4,fontSize: '1.3rem',fontFamily: 'Merriweather Sans',color: '#440044'}} 
             id="customized-dialog-title"
@@ -278,7 +275,6 @@ function MyBoardDialog() {
           </DialogTitle>
           <Divider sx={{ marginBottom: '1.5rem'}}/>
           <Map selectedJob={selectedJob}/>
-       
           <p 
             style={{
               marginTop: "0.7rem", 
@@ -302,73 +298,62 @@ function MyBoardDialog() {
           >
             {selectedJob.location}
           </p>
-        
         </DialogContent>
-      
-          <section style={{paddingLeft: isMobile ? '0rem' : '1rem'}}>
-        
-       
-            <Button
-              variant="contained"
-              disableRipple 
-              onClick={handleClick}
-              sx={{ 
-                mb: 2 ,
-                color: 'white',
-                height: '2rem',
-                backgroundColor: 'red',
-                fontWeight: 'bold',
-                boxShadow: 'none',
-                textTransform: 'none',
-                marginLeft: isMobile ? '1rem' : '2rem',
-                fontFamily: 'Merriweather Sans',
-                border: 'solid 0.1px darkgrey',
-                width: '9rem',
-                '&:hover': {
-                  backgroundColor: '#c62828', 
-                  boxShadow: 'none'
-                },
-              }}
-            >
-                <section style={{display: 'flex', alignItems: 'center'}}>
-                <DeleteOutlineIcon/>
-                <p style={{paddingTop: '0.25rem'}}>Delete Job</p>
-                </section>
-             
-            </Button>
-            <Button
-              variant="contained"
-              disableRipple
-              onClick={handleApplyClick} 
-              sx={{ 
-                mb: 2 ,
-                color: 'white',
-                height: '2rem',
-                backgroundColor: '#ff9800',
-                fontWeight: 'bold',
-                boxShadow: 'none',
-                marginLeft: '1rem',
-                textTransform: 'none',
-                fontFamily: 'Merriweather Sans',
-                width: '9rem',
-                '&:hover': {
-                  backgroundColor: '#e65100', 
-                  boxShadow: 'none'
-                },
-              }}
-            >
-                <section style={{display: 'flex', alignItems: 'center', marginRight: '1rem'}}>
-                <CheckOutlinedIcon/>
-                 <p style={{paddingTop: '0.25rem'}}>Apply</p>
-                </section>
-             
-              
-            </Button>
-      
-          </section>
-       
-          
-        
+        <section style={{paddingLeft: isMobile ? '0rem' : '1rem'}}>
+          <Button
+            variant="contained"
+            disableRipple 
+            onClick={handleClick}
+            sx={{ 
+              mb: 2 ,
+              color: 'white',
+              height: '2rem',
+              backgroundColor: 'red',
+              fontWeight: 'bold',
+              boxShadow: 'none',
+              textTransform: 'none',
+              marginLeft: isMobile ? '1rem' : '2rem',
+              fontFamily: 'Merriweather Sans',
+              border: 'solid 0.1px darkgrey',
+              width: '9rem',
+              '&:hover': {
+                backgroundColor: '#c62828', 
+                boxShadow: 'none'
+              },
+            }}
+          >
+            <section style={{display: 'flex', alignItems: 'center'}}>
+              <DeleteOutlineIcon/>
+              <p style={{paddingTop: '0.25rem'}}>Delete Job</p>
+            </section>
+          </Button>
+          <Button
+            variant="contained"
+            disableRipple
+            onClick={handleApplyClick} 
+            sx={{ 
+              mb: 2 ,
+              color: 'white',
+              height: '2rem',
+              backgroundColor: '#ff9800',
+              fontWeight: 'bold',
+              boxShadow: 'none',
+              marginLeft: '1rem',
+              textTransform: 'none',
+              fontFamily: 'Merriweather Sans',
+              width: '9rem',
+              '&:hover': {
+                backgroundColor: '#e65100', 
+                boxShadow: 'none'
+              },
+            }}
+          >
+            <section style={{display: 'flex', alignItems: 'center', marginRight: '1rem'}}>
+              <CheckOutlinedIcon/>
+              <p style={{paddingTop: '0.25rem'}}>Apply</p>
+            </section>
+          </Button>
+        </section>
       </BootstrapDialog>
     </main>
   )

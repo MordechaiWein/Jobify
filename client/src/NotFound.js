@@ -59,9 +59,7 @@ function NotFound() {
                     {user === null ? "Back to Home Page" : "Back to Main Page" }
                 </Button>
             </Container>
-        </main>
-       
+        </main>   
     )
-
 }
 export default NotFound

@@ -27,15 +27,11 @@ function Copyright(props) {
     </Typography>
   );
 }
-
-
 const defaultTheme = createTheme();
-
 
 function SignUp() {
 
   const history = useHistory()
-
   const {setUser} = useContext(MyContext)
   const [showPassword, setShowPassword] = useState(false)
   const [signUpLoading, setSignUpLoading] = useState(false)
@@ -91,8 +87,7 @@ function SignUp() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-        <LoggedOutNavigation/>
-       
+      <LoggedOutNavigation/>
       <Container component="main" maxWidth="xs" sx={{paddingTop: '5rem'}}>
         <CssBaseline />
         <Box
@@ -103,16 +98,17 @@ function SignUp() {
             alignItems: 'center',
           }}
         >
-            <img width="64" height="64" 
-                src="https://img.icons8.com/glyph-neue/64/1f699d/goal--v1.png" alt="goal--v1"
-                style={{marginBottom: '2rem'}}
-            />
+          <img width="64" height="64" style={{marginBottom: '2rem'}}
+            src="https://img.icons8.com/glyph-neue/64/1f699d/goal--v1.png" alt="goal--v1"
+          />
           <Typography component="h1" variant="h4" 
-            sx={{fontWeight: 'bold', 
-            color: "#1F699D",
-            fontFamily: 'Merriweather Sans',
-            fontSize: '2.5rem'
-            }}>
+            sx={{
+              fontWeight: 'bold', 
+              color: "#1F699D",
+              fontFamily: 'Merriweather Sans',
+              fontSize: '2.5rem'
+            }}
+          >
             Sign up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -126,15 +122,15 @@ function SignUp() {
               onChange={handleChange}
               placeholder='Username*'
               autoComplete="off"
-                InputProps={{
-                    style: {
-                        borderRadius: "16px",
-                    }
-                }}
+              InputProps={{
+                style: {
+                  borderRadius: "16px",
+                }
+              }}
             />
             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.username}</small>
             <TextField
-            {...(errors && errors.password ? { error: true } : {})}
+              {...(errors && errors.password ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -144,27 +140,27 @@ function SignUp() {
               onChange={handleChange}
               autoComplete="password"
               type={showPassword ? 'text' : 'password'}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    ),
-                    style: {
-                        borderRadius: "16px",
-                    }
-                }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                style: {
+                  borderRadius: "16px"
+                }
+              }}
             />
-             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.password}</small>
-                 <TextField
-                  {...(errors && errors.password ? { error: true } : {})}
+            <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.password}</small>
+            <TextField
+              {...(errors && errors.password ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -174,27 +170,27 @@ function SignUp() {
               onChange={handleChange}
               autoComplete="password_confirmation"
               type={showPassword ? 'text' : 'password'}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    ),
-                    style: {
-                        borderRadius: "16px",
-                    }
-                }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                style: {
+                  borderRadius: "16px",
+                }
+              }}
             />
             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.password}</small>
-               <TextField
-                {...(errors && errors.email_address ? { error: true } : {})}
+            <TextField
+              {...(errors && errors.email_address ? { error: true } : {})}
               margin="normal"
               required
               fullWidth
@@ -203,11 +199,11 @@ function SignUp() {
               onChange={handleChange}
               placeholder='Email Address*'
               autoComplete="email_address"
-                InputProps={{
-                    style: {
-                        borderRadius: "16px",
-                    }
-                }}
+              InputProps={{
+                style: {
+                  borderRadius: "16px",
+                }
+              }}
             />
             <small style={{color: 'red', marginLeft: '0.5rem', fontSize: '1rem'}}>{errors && errors.email_address}</small>
             <Button
@@ -222,7 +218,7 @@ function SignUp() {
                 fontWeight: 'bold',
                 fontSize:'1.2rem',
                 fontFamily: 'Merriweather Sans'
-            }}
+              }}
             >
               {signUpLoading === true ? 'Loading...' : 'Sign Up'}
             </Button>
@@ -231,7 +227,7 @@ function SignUp() {
         <Copyright sx={{ mt: 8, mb: 4}} />
       </Container> 
     </ThemeProvider>
-  );
+  )
 }
 
 export default SignUp

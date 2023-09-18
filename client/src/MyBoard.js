@@ -28,7 +28,6 @@ function MyBoard() {
     ]
 
     return (
-
         <main>
             <LoggedInNavigation/>
             <ThemeProvider theme={defaultTheme}>
@@ -41,7 +40,7 @@ function MyBoard() {
                             pb: 6,
                         }}
                     >
-                      <Container maxWidth="lg">
+                        <Container maxWidth="lg">
                             <Typography
                                 component="h1"
                                 variant="h2"
@@ -56,67 +55,61 @@ function MyBoard() {
                             </Typography>
                             <Divider/>
                         </Container>
-
                     </Box>
                     <Container sx={{ py: 3 }} maxWidth="lg">
-                        {user.jobs.length === 0 ? 
-                           
-                           <Typography variant='h5' 
-                            sx={{
-                                fontFamily: 'Merriweather Sans',
-                                 lineHeight: 1.7,
-                                  backgroundColor: '#f5f5f5',
-                                  borderRadius: '16px',
-                                  padding: ' 2rem'
-                                  }}
-                                >
-                            Welcome to Your Board! This is where all your saved jobs will be listed. 
-                            Start exploring job opportunities, and when you find one you like, click the
-                            'Save' button to add it here. Your saved jobs will appear on this page, 
-                            making it easy to keep track of your job prospects.
+                        {user.jobs.length === 0 ?
+                            <Typography variant='h5'
+                                sx={{
+                                    fontFamily: 'Merriweather Sans',
+                                    lineHeight: 1.7,
+                                    backgroundColor: '#f5f5f5',
+                                    borderRadius: '16px',
+                                    padding: ' 2rem'
+                                }}
+                            >
+                                Welcome to Your Board! This is where all your saved jobs will be listed. 
+                                Start exploring job opportunities, and when you find one you like, click the
+                                'Save' button to add it here. Your saved jobs will appear on this page, 
+                                making it easy to keep track of your job prospects.
                            </Typography>
-
-                            :
-                    
+                           :
                             <Grid container spacing={4}>
                                 {user.jobs.map((job, index) => (
                                 <Grid item key={job.id} xs={12} sm={6} md={4}>
-                                <Link to={`myboard/${job.id}`}>
-                                    <Card
-                                        sx={{ 
-                                            height: '20rem', 
-                                            display: 'flex', 
-                                            flexDirection: 'column', 
-                                            backgroundColor: backgroundColors[index % backgroundColors.length]
-                                        }}
-                                    >
-                                        <CardContent sx={{ flexGrow: 1 ,ml: 0, color: 'white'}}>
-                                        
-                                            <Typography gutterBottom variant="h6" component="h2" 
-                                                sx={{fontWeight: 'bold', fontSize: '2.5rem', wordBreak: 'break-word', mb: 0, pt: 1, lineHeight: 1.2,fontFamily: 'Merriweather Sans', }}>
-                                                {job.title}
-                                            </Typography>
-                                            <Typography sx={{fontSize: '1.3rem', fontFamily: 'Merriweather Sans', }}>
-                                                {job.company_name}
-                                            </Typography>
-                                            <Typography sx={{fontSize: '1.3rem', paddingTop: '2.5rem', fontFamily: 'Merriweather Sans', }}>
+                                    <Link to={`myboard/${job.id}`}>
+                                        <Card
+                                            sx={{ 
+                                                height: '20rem', 
+                                                display: 'flex', 
+                                                flexDirection: 'column', 
+                                                backgroundColor: backgroundColors[index % backgroundColors.length]
+                                            }}
+                                        >
+                                            <CardContent sx={{ flexGrow: 1 ,ml: 0, color: 'white'}}>
+                                                <Typography gutterBottom variant="h6" component="h2" 
+                                                    sx={{fontWeight: 'bold', fontSize: '2.5rem', wordBreak: 'break-word', mb: 0, pt: 1, lineHeight: 1.2,fontFamily: 'Merriweather Sans', }}>
+                                                    {job.title}
+                                                </Typography>
+                                                <Typography sx={{fontSize: '1.3rem', fontFamily: 'Merriweather Sans'}}>
+                                                    {job.company_name}
+                                                </Typography>
+                                                <Typography sx={{fontSize: '1.3rem', paddingTop: '2.5rem', fontFamily: 'Merriweather Sans', }}>
                                                     {job.industry.charAt(0).toUpperCase() + job.industry.slice(1)} &nbsp; ● &nbsp;{job.job_type} &nbsp;● &nbsp; {job.location}
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Link>
+                                                </Typography>
+                                            </CardContent>
+                                        </Card>
+                                    </Link>
                                 </Grid>
                                 ))}
                             </Grid>
-                                }
+                        }
                     </Container>
                 </main>
             </ThemeProvider>
             <Route path={'/myboard/:id'}>
               <MyBoardDialog/>
             </Route>
-        </main>             
-
+        </main>            
     ) 
 }
 export default MyBoard

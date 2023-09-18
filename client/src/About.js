@@ -62,8 +62,8 @@ function About() {
                             fontWeight: 'bold', 
                             fontFamily: 'Merriweather Sans',
                             paddingBottom: '5rem'
-                            }}
-                        >
+                        }}
+                    >
                         At Jobify, we understand that finding the perfect job is 
                         not just about securing employment; it's about realizing your aspirations, 
                         achieving your goals, and ultimately, finding fulfillment in your career. 
@@ -84,8 +84,8 @@ function About() {
                             lineHeight: '2.5rem', 
                             fontFamily: 'Merriweather Sans', 
                             color: '#333'
-                            }
-                        }>
+                        }}
+                    >
                         Our vision is to be the catalyst that transforms job searching into a seamless and 
                         empowering experience. We believe that everyone deserves a chance to thrive in 
                         their chosen profession, and we are here to make that vision a reality. 
@@ -114,10 +114,11 @@ function About() {
                         you have access to the most relevant and diverse job listings available.
                     </Typography> 
                     <Typography variant="h5" 
-                        sx={{paddingTop: '2rem', 
-                        lineHeight: '2.5rem', 
-                        fontWeight: 'bold', 
-                        fontFamily: 'Merriweather Sans'
+                        sx={{
+                            paddingTop: '2rem', 
+                            lineHeight: '2.5rem', 
+                            fontWeight: 'bold', 
+                            fontFamily: 'Merriweather Sans'
                         }}
                     >
                         We have designed our website to be intuitive and user-friendly. 
@@ -142,7 +143,7 @@ function About() {
                             lineHeight: '2.5rem', 
                             fontWeight: 'bold', 
                             fontFamily: 'Merriweather Sans'
-                            }}
+                        }}
                     >
                         Your privacy and data security are our top priorities. 
                         We employ the latest security measures to safeguard your personal information and ensure a

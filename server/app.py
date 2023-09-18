@@ -62,7 +62,7 @@ class Signup(Resource):
         user = User(
             username = username,
             email = email_address,
-            admin = False
+            admin = True
         )
         
         validation_errors = {}
@@ -200,71 +200,89 @@ class JobByID(Resource):
     
     def delete(self, id):
         job = Job.query.filter(Job.id == id).first()
-        db.session.delete(job)
-        db.session.commit()
+        if job.created_at > datetime(2023, 9, 15):
+            db.session.delete(job)
+            db.session.commit()
+            return job.to_dict()
+        else:
+            return {"message": 
+                '''Thank you for using our website. You are free to explore and 
+                interact with all functionality for any job you add to Jobify. 
+                However, please note that this particular job cannot be deleted.'''
+            }, 400
 
-        return job.to_dict()
+       
 
     def patch(self, id):
         job = Job.query.filter(Job.id == id).first()
 
-        request_json = request.get_json()
-        for attr in request_json:
-            setattr(job, attr, request_json[attr])
-        
-        validation_errors = {}
-        try:
-            if not job.company_name:
-                validation_errors['company_name'] = 'A company name is a required field.'
-            if not job.title:
-                validation_errors['title'] = 'A title is a required field.'
-            if not job.job_description:
-                validation_errors['job_description'] = 'A job description is a required field.'
-            if not job.job_type:
-                validation_errors['job_type'] = 'A job type is a required field.'
-            if not job.industry:
-                validation_errors['industry'] = 'An industry is a required field.'
-            if job.remote != True and job.remote != False:
-                validation_errors['remote'] = 'You must pick an option. Please choose yes or no.'
-            if not job.salary:
-                validation_errors['salary'] = 'A salary is a required field.'
-            if not job.location:
-                validation_errors['location'] = 'A location is a required field.'
-            if not job.longitude:
-                validation_errors['longitude'] = 'Please enter a longitude.'
-            if not job.latitude:
-                validation_errors['latitude'] = 'Please enter a latitude.'
-            if job.job_description:
-                if len(job.job_description) < 100:
-                    validation_errors['job_description'] = 'Job description must be at least 100 characters.'
-          
-            if validation_errors:
-                return {'errors': validation_errors}, 422
+        if job.created_at > datetime(2023, 9, 15):
+            
+            request_json = request.get_json()
+            for attr in request_json:
+                setattr(job, attr, request_json[attr])
+                
+            validation_errors = {}
+            
+            try:
+                if not job.company_name:
+                    validation_errors['company_name'] = 'A company name is a required field.'
+                if not job.title:
+                    validation_errors['title'] = 'A title is a required field.'
+                if not job.job_description:
+                    validation_errors['job_description'] = 'A job description is a required field.'
+                if not job.job_type:
+                    validation_errors['job_type'] = 'A job type is a required field.'
+                if not job.industry:
+                    validation_errors['industry'] = 'An industry is a required field.'
+                if job.remote != True and job.remote != False:
+                    validation_errors['remote'] = 'You must pick an option. Please choose yes or no.'
+                if not job.salary:
+                    validation_errors['salary'] = 'A salary is a required field.'
+                if not job.location:
+                    validation_errors['location'] = 'A location is a required field.'
+                if not job.longitude:
+                    validation_errors['longitude'] = 'Please enter a longitude.'
+                if not job.latitude:
+                    validation_errors['latitude'] = 'Please enter a latitude.'
+                if job.job_description:
+                    if len(job.job_description) < 100:
+                        validation_errors['job_description'] = 'Job description must be at least 100 characters.'
+            
+                if validation_errors:
+                    return {'errors': validation_errors}, 422
 
-            db.session.add(job)
-            db.session.commit()
-            
-            formatted_created_at = job.created_at.strftime("%B %d, %Y")
-            
-            job_dict = {
-                "id": job.id,
-                "company_name": job.company_name,
-                "title": job.title,
-                "job_description": job.job_description,
-                "job_type": job.job_type,
-                "industry": job.industry,
-                "remote": job.remote,
-                "salary": job.salary,
-                "location": job.location,
-                "longitude": job.longitude,
-                "latitude": job.latitude,
-                "created_at": formatted_created_at
-            }
+                db.session.add(job)
+                db.session.commit()
+                
+                formatted_created_at = job.created_at.strftime("%B %d, %Y")
+                
+                job_dict = {
+                    "id": job.id,
+                    "company_name": job.company_name,
+                    "title": job.title,
+                    "job_description": job.job_description,
+                    "job_type": job.job_type,
+                    "industry": job.industry,
+                    "remote": job.remote,
+                    "salary": job.salary,
+                    "location": job.location,
+                    "longitude": job.longitude,
+                    "latitude": job.latitude,
+                    "created_at": formatted_created_at
+                }
 
-            return job_dict, 201
-            
-        except IntegrityError:
-            return {'error': '422 Unprocessable Entity'}, 422
+                return job_dict, 201
+                
+            except IntegrityError:
+                return {'error': '422 Unprocessable Entity'}, 422
+        else:
+            return {"message": 
+                '''Thank you for using our website. You are free to explore and 
+                interact with all functionality for any job you add to Jobify. 
+                However, please note that this particular job cannot be edited.'''
+            }, 400
+
 
 class UserJobJoins(Resource):
 
@@ -384,17 +402,36 @@ class ResponsibilityByID(Resource):
     def delete(self, id): 
 
         responsibility = Responsibility.query.filter(Responsibility.id == id).first()
-        db.session.delete(responsibility)
-        db.session.commit()
-        return responsibility.to_dict()
+
+        job = Job.query.filter(Job.id == responsibility.job_id).first()
+        
+        if job.created_at > datetime(2023, 9, 15):
+            
+            db.session.delete(responsibility)
+            db.session.commit()
+            return responsibility.to_dict()
+
+        else: 
+            return {"note": 'You are free to interact with all functionality for any job you add to Jobify. However, this responsibility cannot be deleted.'}, 400
+
+
 
 class  QualificationByID(Resource):
     def delete(self, id):
         
         qualification = Qualification.query.filter(Qualification.id == id).first()
-        db.session.delete(qualification)
-        db.session.commit()
-        return qualification.to_dict()
+
+        job = Job.query.filter(Job.id == qualification.job_id).first()
+
+        if job.created_at > datetime(2023, 9, 15):
+            
+            db.session.delete(qualification)
+            db.session.commit()
+            return qualification.to_dict()
+
+        else: 
+            return {"note": 'You are free to interact with all functionality for any job you add to Jobify. However, this qualification cannot be deleted.'}, 400
+
 
 
 api.add_resource(ResponsibilityByID, '/responsibilities/<int:id>', endpoint='responsibilityByID')       

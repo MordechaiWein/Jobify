@@ -1,12 +1,11 @@
 import React from 'react'
 import { useMediaQuery } from '@mui/material'
-import JobifyMovie from '../Media/JobifyMovie.mp4'
-
+import MyMovie from '../Media/MyMovie1.mp4'
 
 function Video() {
   
   const isMobile = useMediaQuery('(max-width: 1295px)');
-  const movie = JobifyMovie;
+  const newMovie = MyMovie
   
   return (
     <main
@@ -32,7 +31,7 @@ function Video() {
           objectFit:  'cover',
         }}
       >
-        <source src={movie} type="video/mp4" />
+        <source src={newMovie} type="video/mp4" />
       </video>
       <div
         style={{
@@ -43,8 +42,7 @@ function Video() {
           textAlign: isMobile ? 'center' : '',
           color: 'white', 
           textShadow: '2px 2px 3px rgba(0, 0, 0, 0.3)' ,
-          width: '80%',
-          
+          width: '80%'
         }}
       >
         <h1
@@ -52,8 +50,7 @@ function Video() {
             fontSize: isMobile ? '4rem' : '5vw',
             marginLeft: isMobile ? '3rem' : '7rem',
             marginRight: isMobile ? '-2.5rem' : '20rem',
-            fontFamily: 'Kanit',
-           
+            fontFamily: 'Kanit' 
           }}
         >
           GET AHEAD WITH JOBIFY
@@ -72,7 +69,6 @@ function Video() {
         </h4>
       </div>
     </main>
-
   )
 }
 export default Video
