@@ -16,6 +16,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import Map from "./Map";
 import Qualifications from "./Qualifications";
+import Tooltip from '@mui/material/Tooltip';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -25,6 +26,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
       padding: theme.spacing(1),
     },
   }));
+
 
 
 function DialogBox({ setEditFLag }) {
@@ -43,27 +45,105 @@ function DialogBox({ setEditFLag }) {
     selectedJob = jobs.find(job => job.id === parseInt(params.id)) 
   }
 
+
   const responsibilityList = selectedJob && selectedJob.responsibilities ? selectedJob.responsibilities.map(responsibility => 
-    <li
-      key={responsibility.id}
-      style={{paddingBottom: '0.9rem', lineHeight: '32px'}}
+    <Tooltip 
+    key={responsibility.id}
+      title={user.admin === true ? 'Delete' : ''} 
+      placement="top-start" arrow 
+      onClick={() => responsibilityEraseClick(responsibility.id)}
+    >  
+    <li 
+
+      key={responsibility.id} 
+      style={{paddingBottom: '0.9rem', lineHeight: '32px',}}
     >
       {responsibility.obligation}
     </li>
+
+    </Tooltip>
+
   ) : []
 
   const qualificationList = selectedJob && selectedJob.qualifications ? selectedJob.qualifications.map(qualification => 
+    <Tooltip 
+    key={qualification.id}
+      title={user.admin === true ? 'Delete' : ''} 
+      placement="top-start" arrow 
+      onClick={() => qualificationEraseClick(qualification.id)}
+    >  
     <li
       key={qualification.id}
       style={{paddingBottom: '0.9rem', lineHeight: '32px'}}
     >
       {qualification.prerequisite}
     </li>
+    </Tooltip>
   ) : []
 
   function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
+  function responsibilityEraseClick(id) {
+    if (user.admin === true) {
+      fetch(`/responsibilities/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => response.json())
+      .then(data => deleteResponsibility(data))
+    }  
+  }
+
+  function qualificationEraseClick(id) {
+    if (user.admin === true) {
+      fetch(`/qualifications/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => response.json())
+      .then(data => deleteQualification(data))
+    }  
+  }
+
+  function deleteQualification(data) {
+    const eraseQualification = jobs.map(job => {
+      if (job.id === data.job_id) {
+        return {...job, qualifications: job.qualifications.filter(qualification => qualification.id !== data.id)}
+      } else {
+        return job
+      }
+    })
+    setJobs(eraseQualification)
+
+    const userEraseQualification = {...user, jobs: user.jobs.map(job => {
+      if (job.id === data.job_id) {
+        return {...job, qualifications: job.qualifications.filter(qualification => qualification.id !== data.id)}
+      } else {
+        return job
+      }
+    })}
+    setUser(userEraseQualification)
+  }
+
+  function deleteResponsibility(data) {
+    const eraseResponsibility= jobs.map(job => {
+      if (job.id === data.job_id) {
+        return {...job, responsibilities: job.responsibilities.filter(responsibility => responsibility.id !== data.id)}
+      } else {
+        return job
+      }
+    })
+    setJobs(eraseResponsibility)
+
+    const userEraseResponsibility = {...user, jobs: user.jobs.map(job => {
+      if (job.id === data.job_id) {
+        return {...job, responsibilities: job.responsibilities.filter(responsibility => responsibility.id !== data.id)}
+      } else {
+        return job
+      }
+    })}
+    setUser(userEraseResponsibility)
   }
 
   function handleEditClick() {

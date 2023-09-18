@@ -75,7 +75,8 @@ class Responsibility(db.Model, SerializerMixin):
     obligation = db.Column(db.String)
     job_id = db.Column(db.Integer(), db.ForeignKey('jobs.id'))
 
-    serialize_rules = ('-job.responsibilities',)
+    serialize_rules = ('-job',)
+    # serialize_rules = ('-job.responsibilities',)
     
     def __repr__(self):
         return f"Responsibility| id: {self.id}, obligation: {self.obligation}"
@@ -87,7 +88,8 @@ class Qualification(db.Model, SerializerMixin):
     prerequisite = db.Column(db.String)
     job_id = db.Column(db.Integer(), db.ForeignKey('jobs.id'))
 
-    serialize_rules = ('-job.qualifications',)
+    serialize_rules = ('-job',)
+    # serialize_rules = ('-job.qualifications',)
     
     def __repr__(self):
         return f"Qualification| id: {self.id}, prerequisite: {self.prerequisite}"

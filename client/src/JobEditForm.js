@@ -42,7 +42,7 @@ function JobEditForm({ setEditFLag }) {
   const [open, setOpen] = useState(true);
   const history = useHistory()
   const params = useParams()
-  const {user, jobs, setJobs} = useContext(MyContext)
+  const {user, setUser, jobs, setJobs} = useContext(MyContext)
 
   let selectedJob = ''
 
@@ -102,6 +102,24 @@ function JobEditForm({ setEditFLag }) {
     setData({ ...data, remote: true })
   }
 
+  function editJob(data) {
+    setJobs(jobs.map(job => {
+      if (job.id === data.id) {
+        return data
+      } else {
+        return job
+      }
+    }))
+    
+    setUser({...user, jobs: user.jobs.map(job => {
+      if (job.id === data.id) {
+        return data 
+      } else {
+        return job
+      }
+    })})
+  }
+
 
 function handleSubmit(e) {
     e.preventDefault()
@@ -113,13 +131,7 @@ function handleSubmit(e) {
     .then((response) => {
         if (response.ok) {
             response.json().then(data => {
-              setJobs(jobs.map(job => {
-                if (job.id === data.id) {
-                  return data
-                } else {
-                  return job
-                }
-              }))
+              editJob(data)
               history.push('/jobportal')
             })
         } else {

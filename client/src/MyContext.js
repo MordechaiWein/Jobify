@@ -10,7 +10,9 @@ function MyProvider({children}) {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch("/me")
+        fetch("/me", {
+            headers: {'Accept': 'application/json'}
+        })
         .then((response) => {
             if (response.ok) {
                 response.json().then(data => {
@@ -22,7 +24,9 @@ function MyProvider({children}) {
     },[])
 
     useEffect(() => {
-        fetch('/jobs')
+        fetch('/jobs', {
+            headers: {'Accept': 'application/json'}
+        })
         .then((response) => {
             if (response.ok) {
                 response.json().then(data => {

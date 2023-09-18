@@ -1,4 +1,4 @@
-from flask import jsonify, request, session, render_template
+from flask import jsonify, request, session, render_template, redirect
 from sqlalchemy.exc import IntegrityError
 from flask_restful import Resource
 from config import app, db, api, bcrypt
@@ -13,10 +13,13 @@ class Me(Resource):
 
     def get(self):
         user = User.query.filter(User.id == session['user_id']).first()
-        if user:
-            return user.to_dict(), 200
+        if request.headers.get('Accept') == 'application/json':
+            if user:
+                return user.to_dict(), 200
+            else:
+                return {'error': "Unauthorized"}, 401
         else:
-            return {'error': "Unauthorized"}, 401
+            return redirect('https://jobify-o1zz.onrender.com/notfound')  
 
 class Logout(Resource):
 
@@ -100,9 +103,11 @@ class Signup(Resource):
 class Jobs(Resource):
 
     def get(self):
-
-        jobs = [job.to_dict() for job in Job.query.all()]  
-        return jobs, 200
+        if request.headers.get('Accept') == 'application/json':
+            jobs = [job.to_dict() for job in Job.query.all()]  
+            return jobs, 200
+        else:
+            return redirect('https://jobify-o1zz.onrender.com/notfound')  
 
     def post(self):
 
@@ -374,8 +379,26 @@ class Qualifications(Resource):
 
         except IntegrityError:
             return {'error': 'Qualifications error'}, 422
-            
 
+class ResponsibilityByID(Resource):
+    def delete(self, id): 
+
+        responsibility = Responsibility.query.filter(Responsibility.id == id).first()
+        db.session.delete(responsibility)
+        db.session.commit()
+        return responsibility.to_dict()
+
+class  QualificationByID(Resource):
+    def delete(self, id):
+        
+        qualification = Qualification.query.filter(Qualification.id == id).first()
+        db.session.delete(qualification)
+        db.session.commit()
+        return qualification.to_dict()
+
+
+api.add_resource(ResponsibilityByID, '/responsibilities/<int:id>', endpoint='responsibilityByID')       
+api.add_resource(QualificationByID, '/qualifications/<int:id>', endpoint='qualificationByID')
 api.add_resource(Qualifications, '/qualifications', endpoint='qualifications')
 api.add_resource(Responsibilities, '/responsibilities', endpoint='responsibilities')      
 api.add_resource(UserAndJobsByID, '/userjobsjoin/<int:id>', endpoint='UserAndJobsByID')

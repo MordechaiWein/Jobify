@@ -19,7 +19,13 @@ function MyBoard() {
     const defaultTheme = createTheme();
     const {user} = useContext(MyContext)
 
-    const backgroundColors = ['rgba(4, 204, 124, 0.85)', 'rgba(100, 210, 244, 0.85)', 'rgba(18, 237, 123, 0.85)', 'rgba(113, 28, 227, 0.85)']
+    const backgroundColors = [
+
+        'rgba(4, 204, 124, 0.85)', 
+        'rgba(100, 210, 244, 0.85)', 
+        'rgba(18, 237, 123, 0.85)', 
+        'rgba(113, 28, 227, 0.85)'
+    ]
 
     return (
 
@@ -53,6 +59,25 @@ function MyBoard() {
 
                     </Box>
                     <Container sx={{ py: 3 }} maxWidth="lg">
+                        {user.jobs.length === 0 ? 
+                           
+                           <Typography variant='h5' 
+                            sx={{
+                                fontFamily: 'Merriweather Sans',
+                                 lineHeight: 1.7,
+                                  backgroundColor: '#f5f5f5',
+                                  borderRadius: '16px',
+                                  padding: ' 2rem'
+                                  }}
+                                >
+                            Welcome to Your Board! This is where all your saved jobs will be listed. 
+                            Start exploring job opportunities, and when you find one you like, click the
+                            'Save' button to add it here. Your saved jobs will appear on this page, 
+                            making it easy to keep track of your job prospects.
+                           </Typography>
+
+                            :
+                    
                             <Grid container spacing={4}>
                                 {user.jobs.map((job, index) => (
                                 <Grid item key={job.id} xs={12} sm={6} md={4}>
@@ -83,6 +108,7 @@ function MyBoard() {
                                 </Grid>
                                 ))}
                             </Grid>
+                                }
                     </Container>
                 </main>
             </ThemeProvider>
