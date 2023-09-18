@@ -161,8 +161,9 @@ function JobPortal() {
                                 style={{
                                     textAlign: 'center', 
                                     fontSize: '2.5rem',
-                                    paddingTop: isMobile ? "4rem" : '7rem',
-                                    marginRight: isMobile ? "2rem" : "3rem"
+                                    paddingTop: isMobile ? "" : '7rem',
+                                    marginRight: isMobile ? "2rem" : "3rem",
+                                    marginBottom: isMobile ? '10rem' : ''
                                 }}
                             >
                                <SearchIcon sx={{ fontSize: isMobile ?  60 : 40, marginBottom: isMobile ? "" : '-0.6rem' }}/>

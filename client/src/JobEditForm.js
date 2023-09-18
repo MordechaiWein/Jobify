@@ -19,7 +19,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-
+import {useMediaQuery } from '@mui/material';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -43,6 +43,7 @@ function JobEditForm({ setEditFLag }) {
   const history = useHistory()
   const params = useParams()
   const {user, setUser, jobs, setJobs} = useContext(MyContext)
+  const isMobile = useMediaQuery('(max-width: 700px)');
 
   let selectedJob = ''
 
@@ -149,10 +150,13 @@ function handleSubmit(e) {
             aria-labelledby="customized-dialog-title"
             open={open}
             scroll='body'
-            sx={{backgroundColor: 'rgba(70, 0, 220, 0.6)'}}
+            fullScreen={isMobile ? true : false}
+            sx={{backgroundColor: 'rgba(70, 0, 220, 0.6)', paddingTop: isMobile ? '6.5rem' : ''}}
             PaperProps={{
                 sx: {
-                    borderRadius: '10px'  
+                    borderRadius: isMobile ? '' : '10px',
+                    borderTopLeftRadius: isMobile ? '12px':  '', 
+                    borderTopRightRadius: isMobile ? '12px' : ''
                 },
             }}
         >
