@@ -377,6 +377,7 @@ function DialogBox({ setEditFLag }) {
             sx={{
               marginLeft: isMobile ? '' : '2rem',
               fontSize: '1.32rem',
+              marginRight: isMobile ? '' : '5rem',
               fontFamily: 'Merriweather Sans' 
             }}
           >

@@ -22,12 +22,13 @@ function About() {
                         color: '#1F699D',
                         fontFamily: 'Merriweather Sans',
                         fontWeight: 'bold',
+                        textAlign: isMobile ? 'center' : ''
                     }}
                 >
                     Unlocking Potential One Click at a Time.
                 </Typography>
             </header>
-            <section style={{textAlign: isMobile?  'center' : ""}}>
+            <section>
                 <Container component="section" maxWidth="lg" sx={{marginTop: 8, marginBottom: 8}}>
                     <CssBaseline />
                     <Typography variant="h3" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
@@ -48,7 +49,7 @@ function About() {
                     </Typography>
                 </Container>
             </section>
-            <section style={{backgroundColor: '#e0f2f1',textAlign: isMobile?  'center' : ""}}>
+            <section style={{backgroundColor: '#e0f2f1'}}>
                 <Container component="section" maxWidth="lg" sx={{marginTop: 8, color: '#1F699D'}}>
                     <CssBaseline />
                     <Typography variant="h3" sx={{fontWeight: 'bold',paddingTop: '4rem',fontFamily: 'Merriweather Sans'}}>
@@ -71,7 +72,7 @@ function About() {
                     </Typography> 
                 </Container>
             </section>
-            <section style={{textAlign: isMobile?  'center' : ""}}>
+            <section>
                 <Container component="section" maxWidth="lg" sx={{marginTop: 8}}>
                     <CssBaseline />
                     <Typography variant="h3" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
@@ -94,7 +95,7 @@ function About() {
                     </Typography>
                 </Container>
             </section>
-            <section style={{backgroundColor: '#e0f2f1', minHeight: '50vh',textAlign: isMobile?  'center' : ""}}>
+            <section style={{backgroundColor: '#e0f2f1', minHeight: '50vh'}}>
                 <Container component="section" maxWidth="lg" sx={{marginTop: 8, color: '#1F699D'}}>
                     <CssBaseline />
                     <Typography variant="h3" sx={{fontWeight: 'bold', paddingTop: '5rem', fontFamily: 'Merriweather Sans'}}>
@@ -162,7 +163,7 @@ function About() {
                     </Typography> 
                 </Container>
             </section>
-            <section style={{textAlign: isMobile?  'center' : ""}}>
+            <section>
                 <Container component="section" maxWidth="lg" sx={{marginTop: 8}}>
                     <CssBaseline />
                     <Typography variant="h3" sx={{fontWeight: 'bold', fontFamily: 'Merriweather Sans', color: '#333'}}>
