@@ -1,12 +1,12 @@
 import React from 'react'
 import { useMediaQuery } from '@mui/material'
-import MyMovie from '../Media/MyMovie1.mp4'
+// import MyMovie from '../Media/MyMovie1.mp4'
 import CompressedMovie from '../Media/MyMovieCompressed.mp4'
 
 function Video() {
   
   const isMobile = useMediaQuery('(max-width: 1295px)');
-  const newMovie = MyMovie
+  // const newMovie = MyMovie
   const cMovie = CompressedMovie
   
   return (
