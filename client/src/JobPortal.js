@@ -166,7 +166,7 @@ function JobPortal() {
                                         <Link to={`jobportal/${job.id}`}>
                                             <Card
                                                 sx={{ 
-                                                    height: '20rem', 
+                                                    height: '22rem', 
                                                     display: 'flex', 
                                                     flexDirection: 'column',  
                                                 }}

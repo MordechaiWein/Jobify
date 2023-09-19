@@ -417,6 +417,7 @@ function DialogBox({ setEditFLag }) {
                 color: 'rgba(25,4,69,0.9)',
                 fontFamily: 'Merriweather Sans',
                 marginTop: '1rem',
+                marginRight: isMobile ? '' : '7rem'
               }}
             >
               {responsibilityList}
@@ -435,6 +436,7 @@ function DialogBox({ setEditFLag }) {
               color: 'rgba(25,4,69,0.9)',
               fontFamily: 'Merriweather Sans',
               marginTop: '1rem',
+              marginRight: isMobile ? '' : '7rem'
             }}
           >
             {qualificationList}

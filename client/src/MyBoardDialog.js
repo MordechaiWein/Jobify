@@ -245,6 +245,7 @@ function MyBoardDialog() {
               color: 'rgba(25,4,69,0.9)',
               fontFamily: 'Merriweather Sans',
               marginTop: '1rem',
+              marginRight: isMobile ? '' : '7rem'
             }}
           >
             {responsibilityList}
@@ -263,6 +264,7 @@ function MyBoardDialog() {
               color: 'rgba(25,4,69,0.9)',
               fontFamily: 'Merriweather Sans',
               marginTop: '1rem',
+              marginRight: isMobile ? '' : '7rem'
             }}
           >
             {qualificationList}

@@ -21,6 +21,7 @@ function MyBoard() {
 
     const backgroundColors = [
 
+        'rgba(222, 28, 60, 0.85)',
         'rgba(4, 204, 124, 0.85)', 
         'rgba(100, 210, 244, 0.85)', 
         'rgba(18, 237, 123, 0.85)', 

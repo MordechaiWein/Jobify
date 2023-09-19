@@ -15,7 +15,7 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
+    username = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
     email = db.Column(db.String)
     admin = db.Column(db.Boolean, default=False)
@@ -24,7 +24,6 @@ class User(db.Model, SerializerMixin):
    
     serialize_rules = ('-jobs.users',)
    
-  
     def __repr__(self):
         return f"User| id: {self.id}, username: {self.username}, password: {self._password_hash}"
     
@@ -46,16 +45,16 @@ class Job(db.Model, SerializerMixin):
     __tablename__ = 'jobs'
 
     id = db.Column(db.Integer, primary_key=True)
-    company_name = db.Column(db.String)
-    title = db.Column(db.String)
-    job_description = db.Column(db.String)
-    job_type =  db.Column(db.String)
-    industry = db.Column(db.String)
+    company_name = db.Column(db.String, nullable=False)
+    title = db.Column(db.String, nullable=False)
+    job_description = db.Column(db.String, nullable=False)
+    job_type =  db.Column(db.String, nullable=False)
+    industry = db.Column(db.String, nullable=False)
     remote = db.Column(db.Boolean, default=False)
-    salary = db.Column(db.String)
-    location = db.Column(db.String)
-    longitude = db.Column(db.Float)
-    latitude =  db.Column(db.Float)
+    salary = db.Column(db.String, nullable=False)
+    location = db.Column(db.String, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
+    latitude =  db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     
     users = db.relationship('User', secondary= user_job_join, back_populates='jobs')
@@ -72,8 +71,8 @@ class Responsibility(db.Model, SerializerMixin):
     __tablename__ = 'responsibilities'
 
     id = db.Column(db.Integer, primary_key=True)
-    obligation = db.Column(db.String)
-    job_id = db.Column(db.Integer(), db.ForeignKey('jobs.id'))
+    obligation = db.Column(db.String, nullable=False)
+    job_id = db.Column(db.Integer(), db.ForeignKey('jobs.id'), nullable=False)
 
     serialize_rules = ('-job',)
     # serialize_rules = ('-job.responsibilities',)
@@ -85,8 +84,8 @@ class Qualification(db.Model, SerializerMixin):
     __tablename__ = 'qualifications'
     
     id = db.Column(db.Integer, primary_key=True)
-    prerequisite = db.Column(db.String)
-    job_id = db.Column(db.Integer(), db.ForeignKey('jobs.id'))
+    prerequisite = db.Column(db.String, nullable=False)
+    job_id = db.Column(db.Integer(), db.ForeignKey('jobs.id'), nullable=False)
 
     serialize_rules = ('-job',)
     # serialize_rules = ('-job.qualifications',)

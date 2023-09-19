@@ -12,7 +12,7 @@ function Video() {
       style={{
         position: 'relative',
         width: '100%',
-        height: '80vh',
+        height: isMobile ? '80vh' : '80vh',
         overflow: 'hidden',
 
       }}
@@ -24,10 +24,10 @@ function Video() {
         playsInline 
         style={{
           position: 'absolute',
-          top: '0',
+          top: isMobile ? '-4.5%' : '0', 
           left: '0',
           width: '100%',
-          height:   '80vh',
+          height:  isMobile ? '100vh' : '80vh',
           objectFit:  'cover',
         }}
       >

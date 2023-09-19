@@ -200,7 +200,7 @@ class JobByID(Resource):
     
     def delete(self, id):
         job = Job.query.filter(Job.id == id).first()
-        if job.created_at > datetime(2023, 9, 15):
+        if job.created_at > datetime(2023, 9, 20):
             db.session.delete(job)
             db.session.commit()
             return job.to_dict()
@@ -216,7 +216,7 @@ class JobByID(Resource):
     def patch(self, id):
         job = Job.query.filter(Job.id == id).first()
 
-        if job.created_at > datetime(2023, 9, 15):
+        if job.created_at > datetime(2023, 9, 20):
             
             request_json = request.get_json()
             for attr in request_json:
@@ -405,7 +405,7 @@ class ResponsibilityByID(Resource):
 
         job = Job.query.filter(Job.id == responsibility.job_id).first()
         
-        if job.created_at > datetime(2023, 9, 15):
+        if job.created_at > datetime(2023, 9, 20):
             
             db.session.delete(responsibility)
             db.session.commit()
@@ -423,7 +423,7 @@ class  QualificationByID(Resource):
 
         job = Job.query.filter(Job.id == qualification.job_id).first()
 
-        if job.created_at > datetime(2023, 9, 15):
+        if job.created_at > datetime(2023, 9, 20):
             
             db.session.delete(qualification)
             db.session.commit()
@@ -431,8 +431,6 @@ class  QualificationByID(Resource):
 
         else: 
             return {"note": 'You are free to interact with all functionality for any job you add to Jobify. However, this qualification cannot be deleted.'}, 400
-
-
 
 api.add_resource(ResponsibilityByID, '/responsibilities/<int:id>', endpoint='responsibilityByID')       
 api.add_resource(QualificationByID, '/qualifications/<int:id>', endpoint='qualificationByID')
