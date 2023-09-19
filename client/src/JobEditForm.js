@@ -402,9 +402,9 @@ function JobEditForm({ setEditFLag }) {
                           onClick={() => setMessage('')}
                           sx={{
                             color: 'red',
-                            marginTop: '1rem', 
-                            marginLeft: '3rem', 
-                            marginRight: '20rem',
+                            marginTop: isMobile ? '3rem' : '1rem', 
+                            marginLeft: isMobile ? '1.5rem' : '3rem', 
+                            marginRight: isMobile ? '2rem' : '20rem',
                             '&:hover': {
                               backgroundColor: 'red', 
                               color: 'white',

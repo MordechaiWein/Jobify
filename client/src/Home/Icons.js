@@ -41,7 +41,7 @@ function Icons() {
         <main style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: isMobile ? '2rem' : '' }}>
           <section 
             style={{
-              border: 'solid',
+              border: 'solid 1.7px',
               padding: '1rem' ,
               borderRadius: '40px',
               width: '5rem',

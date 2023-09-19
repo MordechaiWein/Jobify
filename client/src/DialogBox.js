@@ -564,9 +564,9 @@ function DialogBox({ setEditFLag }) {
                 <CloseIcon 
                   onClick={() => setMessage('')}
                   sx={{color: 'red',
-                    marginTop: '1rem', 
-                    marginLeft: '3rem', 
-                    marginRight: '20rem',
+                    marginTop: isMobile ? '2rem' : '1rem', 
+                    marginLeft: isMobile ? '1rem' : '3rem', 
+                    marginRight: isMobile ? '2rem' : '20rem',
                     '&:hover': {
                       backgroundColor: 'red', 
                       color: 'white',
