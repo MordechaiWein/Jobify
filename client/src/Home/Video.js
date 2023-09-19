@@ -1,11 +1,13 @@
 import React from 'react'
 import { useMediaQuery } from '@mui/material'
 import MyMovie from '../Media/MyMovie1.mp4'
+import CompressedMovie from '../Media/MyMovieCompressed.mp4'
 
 function Video() {
   
   const isMobile = useMediaQuery('(max-width: 1295px)');
   const newMovie = MyMovie
+  const cMovie = CompressedMovie
   
   return (
     <main
@@ -32,7 +34,7 @@ function Video() {
           objectFit:  'cover',
         }}
       >
-        <source src={newMovie} type="video/mp4" />
+        <source src={cMovie} type="video/mp4" />
       </video>
       <div
         style={{
