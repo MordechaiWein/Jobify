@@ -21,6 +21,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useMediaQuery } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function JobPortal() {
     
@@ -62,9 +63,11 @@ function JobPortal() {
         setSelectedIndustryJobs(event.target.value)      
     }
 
+
     return (
         <main>
             <LoggedInNavigation/>
+            {jobs.length > 0 ? 
             <ThemeProvider theme={defaultTheme}>
                 <CssBaseline />
                 <main>
@@ -144,7 +147,7 @@ function JobPortal() {
                         </Container>
                     </Box>
                     <Container sx={{ py: 3 }} maxWidth="lg">
-                        {organizedJobList.length === 0 ?
+                        {organizedJobList.length === 0 && jobs.length > 0 ?
                             <Typography 
                                 style={{
                                     textAlign: 'center', 
@@ -243,6 +246,27 @@ function JobPortal() {
                     </Container>
                 </main>
             </ThemeProvider>
+            :
+            <Box 
+                sx={{
+                    textAlign: 'center', 
+                    backgroundColor: '#f5f5f5', 
+                    minHeight: '100vh',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column' 
+                }}
+            >
+                <CircularProgress sx={{color: '#1F699D', marginRight: '2.5rem'}}/>
+                <Typography 
+                    sx={{color: '#1F699D', marginTop: '2rem', fontFamily: 'Merriweather Sans'}} 
+                    variant='h4'
+                >
+                    LOADING...
+                </Typography>
+            </Box>
+            }
             <Route path={'/jobportal/:id'}>
               <PopUp/>
             </Route>
@@ -252,3 +276,10 @@ function JobPortal() {
 export default JobPortal
 
 
+
+
+
+
+
+
+ 
