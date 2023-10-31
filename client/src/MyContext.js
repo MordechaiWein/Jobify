@@ -27,13 +27,8 @@ function MyProvider({children}) {
         fetch('/jobs', {
             headers: {'Accept': 'application/json'}
         })
-        .then((response) => {
-            if (response.ok) {
-                response.json().then(data => {
-                    setJobs(data)
-                })
-            } else {console.log('blank')}
-        })
+        .then(response =>  response.json())
+        .then (data => setJobs(data))
     },[])
      
     return (
