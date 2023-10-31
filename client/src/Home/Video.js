@@ -24,7 +24,7 @@ function Video() {
         loop
         muted
         playsInline 
-        preload="auto" 
+        preload="none" 
         style={{
           position: 'absolute',
           top: isMobile ? '-4.5%' : '0', 
