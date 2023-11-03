@@ -13,6 +13,7 @@ import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import MyBoardDialog from './MyBoardDialog';
 import Divider from '@mui/material/Divider';
+import JobApplicationLog from './JobApplicationLog';
 
 function MyBoard() {
     
@@ -110,6 +111,9 @@ function MyBoard() {
             <Route path={'/myboard/:id'}>
               <MyBoardDialog/>
             </Route>
+            <Container  maxWidth="lg">
+                <JobApplicationLog/>
+            </Container>    
         </main>            
     ) 
 }
