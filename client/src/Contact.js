@@ -47,24 +47,35 @@ function Contact() {
 
         <main style={{paddingLeft: isMobile ? '0.5rem' : '5rem', paddingRight: isMobile ? '0.5rem' : '5rem'}}>
             <LoggedOutNavigation/>
-            <section style={{backgroundColor: '#F5F5F5', height: '30rem',  marginTop: '7rem', marginBottom: isLargeScreen ? '10rem' : ''}}>
-                <Typography 
-                    variant="h3" 
+            <section
+                style={{
+                    backgroundColor: '#F5F5F5',
+                    minHeight: '48.5vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: '7rem',
+                    marginBottom: isLargeScreen ? '10rem' : '0' 
+                }}
+            >
+                <Typography
+                    variant={ isLargeScreen ? "h1" : "h3"}
                     color="text.primary"
-                    sx={{fontFamily: 'Merriweather Sans', textAlign: 'center', paddingTop: '10rem', color: '#1F699D'}} 
+                    sx={{ fontFamily: 'Merriweather Sans', color: '#1F699D' }}
                 >
                     Get in touch
                 </Typography>
-                <Typography 
-                    variant="h6"
+                <Typography
+                    variant={isLargeScreen ? "h4" : "h6"}
                     color="text.primary"
-                    sx={{fontFamily: 'Merriweather Sans', textAlign: 'center', paddingTop: '1rem'}} 
+                    sx={{ fontFamily: 'Merriweather Sans', textAlign: 'center', paddingTop: '1rem' }}
                 >
                     For questions, inquiries, or feedback, please message us below.
                 </Typography>
             </section>
             <form onSubmit={sendEmail}>
-                <div style={{ display: isMobile ? '' : 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: isMobile ? '' : 'flex', justifyContent: 'space-between', padding: isLargeScreen ? "10rem" : ""  }}>
                     <section style={{ marginTop: '3rem', flex: 1 }}>
                         <label style={{ fontWeight: 'bold' }}>Name</label>
                         <br />
@@ -129,7 +140,7 @@ function Contact() {
                             rows={11}
                             sx={{marginTop: '-0.4rem'}}
                         />
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '4rem'}}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: isLargeScreen ? '0rem' : '4rem'}}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <h3 style={{marginRight: '2rem', color: '#2e7d32'}}>{success}</h3>
                             </div>
