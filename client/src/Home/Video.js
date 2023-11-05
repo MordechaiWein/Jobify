@@ -49,7 +49,7 @@ function Video() {
               overflow: 'hidden',
             }} 
             src={imagePlaceholder}
-            alt='Hero Placeholder Image'
+            alt='Hero Placeholder'
           />
       )}
       <div
