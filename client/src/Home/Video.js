@@ -2,12 +2,14 @@ import React from 'react'
 import { useMediaQuery } from '@mui/material'
 // import MyMovie from '../Media/MyMovie1.mp4'
 import CompressedMovie from '../Media/MyMovieCompressed.mp4'
+import ImagePlaceholder from '../Images/placeholderImage.png'; 
 
 function Video() {
   
   const isMobile = useMediaQuery('(max-width: 1295px)');
   // const newMovie = MyMovie
   const cMovie = CompressedMovie
+  const imagePlaceholder = ImagePlaceholder
   
   return (
     <main
@@ -19,24 +21,36 @@ function Video() {
 
       }}
     >
-      <video 
-        autoPlay
-        loop
-        muted
-        playsInline 
-        preload="none" 
-        style={{
-          position: 'absolute',
-          top: isMobile ? '-4.5%' : '0', 
-          left: '0',
-          width: '100%',
-          height:  isMobile ? '100vh' : '80vh',
-          objectFit:  'cover',
-        }}
-      >
-        {/* <source src={newMovie} type="video/mp4" /> */}
-        <source src={cMovie} type="video/mp4" />
-      </video>
+      {cMovie ? (
+        <video 
+          autoPlay
+          loop
+          muted
+          playsInline 
+          preload="none"
+          style={{
+            position: 'absolute',
+            top: isMobile ? '-4.5%' : '0', 
+            left: '0',
+            width: '100%',
+            height:  isMobile ? '100vh' : '80vh',
+            objectFit:  'cover',
+          }}
+        >
+          {/* <source src={newMovie} type="video/mp4" /> */}
+          <source src={cMovie} type="video/mp4" />
+        </video>
+        ) : (
+          <img 
+            style={{
+              width: '100%',
+              height: isMobile ? '80vh' : '80vh',
+              position: 'relative',
+              overflow: 'hidden',
+            }} 
+            src={imagePlaceholder}
+          />
+      )}
       <div
         style={{
           position: 'absolute',
@@ -76,3 +90,4 @@ function Video() {
   )
 }
 export default Video
+
