@@ -56,18 +56,18 @@ function Contact() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginTop: '7rem',
-                    marginBottom: isLargeScreen ? '10rem' : '0' 
+                   
                 }}
             >
                 <Typography
-                    variant={ isLargeScreen ? "h1" : "h3"}
+                    variant="h3"
                     color="text.primary"
                     sx={{ fontFamily: 'Merriweather Sans', color: '#1F699D' }}
                 >
                     Get in touch
                 </Typography>
                 <Typography
-                    variant={isLargeScreen ? "h4" : "h6"}
+                    variant="h6"
                     color="text.primary"
                     sx={{ fontFamily: 'Merriweather Sans', textAlign: 'center', paddingTop: '1rem' }}
                 >
@@ -75,7 +75,7 @@ function Contact() {
                 </Typography>
             </section>
             <form onSubmit={sendEmail}>
-                <div style={{ display: isMobile ? '' : 'flex', justifyContent: 'space-between', padding: isLargeScreen ? "10rem" : ""  }}>
+                <div style={{ display: isMobile ? '' : 'flex', justifyContent: 'space-between'}}>
                     <section style={{ marginTop: '3rem', flex: 1 }}>
                         <label style={{ fontWeight: 'bold' }}>Name</label>
                         <br />
@@ -138,7 +138,7 @@ function Contact() {
                             onChange={handleChange}
                             multiline
                             rows={11}
-                            sx={{marginTop: '-0.4rem'}}
+                            sx={{marginTop: '-0.4rem', marginBottom: '1rem'}}
                         />
                         <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: isLargeScreen ? '0rem' : '4rem'}}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
