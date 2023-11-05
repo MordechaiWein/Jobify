@@ -11,12 +11,13 @@ emailjs.init('9rKi_2iq-UU_owZi4');
 function Contact() {
 
     const isMobile = useMediaQuery('(max-width: 750px)');
+    const isLargeScreen = useMediaQuery('(min-width: 1729px)');
     const [success, setSuccess] = useState('')
     const [data, setData] = useState({
-        senderName: '',
-        senderEmail: '',
-        senderSubject: '',
-        senderMessage: ''
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
     })
     
     function sendEmail(e) {
@@ -46,7 +47,7 @@ function Contact() {
 
         <main style={{paddingLeft: isMobile ? '0.5rem' : '5rem', paddingRight: isMobile ? '0.5rem' : '5rem'}}>
             <LoggedOutNavigation/>
-            <section style={{backgroundColor: '#F5F5F5', height: '30rem',  marginTop: '7rem'}}>
+            <section style={{backgroundColor: '#F5F5F5', height: '30rem',  marginTop: '7rem', marginBottom: isLargeScreen ? '10rem' : ''}}>
                 <Typography 
                     variant="h3" 
                     color="text.primary"
@@ -128,7 +129,7 @@ function Contact() {
                             rows={11}
                             sx={{marginTop: '-0.4rem'}}
                         />
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '70px'}}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '4rem'}}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <h3 style={{marginRight: '2rem', color: '#2e7d32'}}>{success}</h3>
                             </div>
