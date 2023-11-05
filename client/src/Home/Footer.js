@@ -1,6 +1,7 @@
 import React from "react"
 import 'semantic-ui-css/semantic.min.css';
 import {Container, Grid, Header, List,Segment,} from 'semantic-ui-react'
+import { NavLink} from "react-router-dom";
 
 function Footer() {
 
@@ -36,7 +37,7 @@ function Footer() {
                         <Grid.Column width={3}>
                             <Header as='h3' inverted style={{color: '#1F699D'}} content='Information'/>
                             <List link inverted>
-                                <List.Item style={{color: '#1F699D'}} as='a'>Help / Contact Us</List.Item>
+                                <NavLink to='/contact'><List.Item style={{color: '#1F699D'}} as='a'>Help / Contact Us</List.Item></NavLink>
                                 <List.Item style={{color: '#1F699D'}} as='a'>Guidelines</List.Item>
                                 <List.Item style={{color: '#1F699D'}} as='a'>Terms of Use</List.Item>
                                 <List.Item style={{color: '#1F699D'}} as='a'>Privacy & Cookies</List.Item>
@@ -50,7 +51,6 @@ function Footer() {
                 </Grid>
             </Container>
         </Segment>
-
     )
 }
 

@@ -9,6 +9,7 @@ import About from './About'
 import Admin from './Admin'
 import JobPortal from './JobPortal'
 import { MyContext } from "./MyContext";
+import Contact from './Contact'
 
 function App() {
 
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route exact path='/signup'>
               <SignUp/>
+            </Route>
+            <Route exact path='/contact'>
+              <Contact/>
             </Route>
             <Route path='*'>
               <NotFound/>

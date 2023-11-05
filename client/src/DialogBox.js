@@ -284,6 +284,7 @@ function DialogBox({ setEditFLag }) {
                 '&:hover': {
                   backgroundColor: 'red', 
                   color: 'white',
+                  borderRadius: '5rem'
                 },
               }} 
               onClick={() => setError('')}
