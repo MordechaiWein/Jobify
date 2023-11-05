@@ -41,7 +41,7 @@ function Contact() {
     function handleChange(event) {
         setData({...data, [event.target.name]: event.target.value})
     }
-
+  
     return (
 
         <main style={{paddingLeft: isMobile ? '0.5rem' : '5rem', paddingRight: isMobile ? '0.5rem' : '5rem'}}>
@@ -128,7 +128,7 @@ function Contact() {
                             rows={11}
                             sx={{marginTop: '-0.4rem'}}
                         />
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '5rem'}}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '70px'}}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <h3 style={{marginRight: '2rem', color: '#2e7d32'}}>{success}</h3>
                             </div>
