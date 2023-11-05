@@ -11,7 +11,6 @@ emailjs.init('9rKi_2iq-UU_owZi4');
 function Contact() {
 
     const isMobile = useMediaQuery('(max-width: 750px)');
-    const isLargeScreen = useMediaQuery('(min-width: 1729px)');
     const [success, setSuccess] = useState('')
     const [data, setData] = useState({
         name: '',
@@ -140,7 +139,7 @@ function Contact() {
                             rows={11}
                             sx={{marginTop: '-0.4rem', marginBottom: '1rem'}}
                         />
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: isLargeScreen ? '0rem' : '4rem'}}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '4rem'}}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <h3 style={{marginRight: '2rem', color: '#2e7d32'}}>{success}</h3>
                             </div>
