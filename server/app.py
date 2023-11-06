@@ -19,7 +19,17 @@ class Me(Resource):
             else:
                 return {'error': "Unauthorized"}, 401
         else:
-            return redirect('https://jobify-o1zz.onrender.com/notfound')  
+            return redirect('https://www.jobifynow.com/notfound')  
+
+class People(Resource):
+
+    def get(self):
+        people =[person.to_dict() for person in User.query.all()]
+        if request.headers.get('Accept') == 'application/json':
+            return people, 200
+        else:
+            return redirect('https://www.jobifynow.com/notfound')  
+
 
 class Logout(Resource):
 
@@ -107,7 +117,7 @@ class Jobs(Resource):
             jobs = [job.to_dict() for job in Job.query.all()]  
             return jobs, 200
         else:
-            return redirect('https://jobify-o1zz.onrender.com/notfound')  
+            return redirect('https://www.jobifynow.com/notfound')  
 
     def post(self):
 
@@ -432,6 +442,7 @@ class  QualificationByID(Resource):
         else: 
             return {"note": 'You are free to interact with all functionality for any job you add to Jobify. However, this qualification cannot be deleted.'}, 400
 
+api.add_resource(People, '/people', endpoint='people')
 api.add_resource(ResponsibilityByID, '/responsibilities/<int:id>', endpoint='responsibilityByID')       
 api.add_resource(QualificationByID, '/qualifications/<int:id>', endpoint='qualificationByID')
 api.add_resource(Qualifications, '/qualifications', endpoint='qualifications')

@@ -22,7 +22,7 @@ function Footer() {
                                 <List.Item style={{color: '#1F699D'}} as='a'>About / Press</List.Item>
                                 <List.Item style={{color: '#1F699D'}} as='a'>Awards</List.Item>
                                 <List.Item style={{color: '#1F699D'}} as='a'>Blog</List.Item>
-                                <List.Item style={{color: '#1F699D'}} as='a'>Research</List.Item>
+                                <NavLink to='/research'><List.Item style={{color: '#1F699D'}} as='a'>Research</List.Item></NavLink>
                                 <List.Item style={{color: '#1F699D'}} as='a'>Guides</List.Item>
                             </List>
                         </Grid.Column>
