@@ -17,7 +17,7 @@ import Divider from '@mui/material/Divider';
 function MyBoard() {
     
     const defaultTheme = createTheme();
-    const {user} = useContext(MyContext)
+    const {user, jobs} = useContext(MyContext)
 
     const backgroundColors = [
 
@@ -75,33 +75,36 @@ function MyBoard() {
                            </Typography>
                            :
                             <Grid container spacing={4}>
-                                {user.jobs.map((job, index) => (
-                                <Grid item key={job.id} xs={12} sm={6} md={4}>
-                                    <Link to={`myboard/${job.id}`}>
-                                        <Card
-                                            sx={{ 
-                                                height: '20rem', 
-                                                display: 'flex', 
-                                                flexDirection: 'column', 
-                                                backgroundColor: backgroundColors[index % backgroundColors.length]
-                                            }}
-                                        >
-                                            <CardContent sx={{ flexGrow: 1 ,ml: 0, color: 'white'}}>
-                                                <Typography gutterBottom variant="h6" component="h2" 
-                                                    sx={{fontWeight: 'bold', fontSize: '2.5rem', wordBreak: 'break-word', mb: 0, pt: 1, lineHeight: 1.2,fontFamily: 'Merriweather Sans', }}>
-                                                    {job.title}
-                                                </Typography>
-                                                <Typography sx={{fontSize: '1.3rem', fontFamily: 'Merriweather Sans'}}>
-                                                    {job.company_name}
-                                                </Typography>
-                                                <Typography sx={{fontSize: '1.3rem', paddingTop: '2.5rem', fontFamily: 'Merriweather Sans', }}>
-                                                    {job.industry.charAt(0).toUpperCase() + job.industry.slice(1)} &nbsp; ● &nbsp;{job.job_type} &nbsp;● &nbsp; {job.location}
-                                                </Typography>
-                                            </CardContent>
-                                        </Card>
-                                    </Link>
-                                </Grid>
-                                ))}
+                                {jobs.length > 0 ? user.jobs.map((job, index) => (
+                                    <Grid item key={job.id} xs={12} sm={6} md={4}>
+                                        <Link to={`myboard/${job.id}`}>
+                                            <Card
+                                                sx={{ 
+                                                    height: '20rem', 
+                                                    display: 'flex', 
+                                                    flexDirection: 'column', 
+                                                    backgroundColor: backgroundColors[index % backgroundColors.length]
+                                                }}
+                                            >
+                                                <CardContent sx={{ flexGrow: 1 ,ml: 0, color: 'white'}}>
+                                                    <Typography gutterBottom variant="h6" component="h2" 
+                                                        sx={{fontWeight: 'bold', fontSize: '2.5rem', wordBreak: 'break-word', mb: 0, pt: 1, lineHeight: 1.2,fontFamily: 'Merriweather Sans', }}>
+                                                        {job.title}
+                                                    </Typography>
+                                                    <Typography sx={{fontSize: '1.3rem', fontFamily: 'Merriweather Sans'}}>
+                                                        {job.company_name}
+                                                    </Typography>
+                                                    <Typography sx={{fontSize: '1.3rem', paddingTop: '2.5rem', fontFamily: 'Merriweather Sans', }}>
+                                                        {job.industry.charAt(0).toUpperCase() + job.industry.slice(1)} &nbsp; ● &nbsp;{job.job_type} &nbsp;● &nbsp; {job.location}
+                                                    </Typography>
+                                                </CardContent>
+                                            </Card>
+                                        </Link>
+                                    </Grid>
+                                ))
+                                :
+                                <h1 style={{margin: 'auto', marginTop: '5rem'}}>⏳Please wait Jobs are loading...</h1>
+                                }
                             </Grid>
                         }
                     </Container>
