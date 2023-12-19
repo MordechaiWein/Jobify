@@ -14,6 +14,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoggedOutNavigation from './Navigation/LoggedOutNavigation';
 import { MyContext } from "./MyContext";
 import { useHistory } from "react-router-dom";
+import logo from "./logo.jpeg"
 
 function Copyright(props) {
   return (
@@ -40,6 +41,8 @@ const defaultTheme = createTheme({
 });
 
 function SignIn() {
+
+  const logoImage = logo
 
   const {setUser} = useContext(MyContext)
   const history = useHistory()
@@ -101,15 +104,17 @@ function SignIn() {
             alignItems: 'center',
           }}
         >
-          <img width="64" height="64" style={{marginBottom: '2rem'}}
+          {/* <img width="64" height="64" style={{marginBottom: '2rem'}}
             src="https://img.icons8.com/glyph-neue/64/1f699d/goal--v1.png" alt="goal--v1"
-          />
+          /> */}
+          <img src={logoImage} alt="logo" style={{width: '250px'}}/>
           <Typography component="h1" variant="h4" 
             sx={{
               fontWeight: 'bold', 
               color: "#1F699D",
               fontFamily: 'Merriweather Sans',
-              fontSize: '2.5rem'
+              fontSize: '1.5rem',
+              marginTop: '2rem'
             }}
           >
             Log in

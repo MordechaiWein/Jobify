@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 
+
  interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -23,6 +24,8 @@ import { Link } from 'react-router-dom';
 const drawerWidth = '100%';
 
 function LoggedOutNavigation(props: Props) {
+
+
   
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
